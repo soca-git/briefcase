@@ -1,11 +1,13 @@
 package com.example.demo.stock;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path="api/v1/stock")
 public class StockController
 {
@@ -23,18 +25,29 @@ public class StockController
         this.stockService = stockService;
     }
 
-    @GetMapping
-    public List<Stock> getStocks()
+    @GetMapping()
+//    public List<Stock> getStocks()
+//    {
+//        return stockService.getStocks();
+//    }
+    public String stockForm(Model model)
     {
-        return stockService.getStocks();
+        model.addAttribute("stock", new Stock());
+        model.addAttribute("stocks", stockService.getStocks());
+        return "stock";
     }
 
     // RequestBody maps the JSON body received in the
     // post request to a Stock object for insertion
     // into the database.
-    @PostMapping
-    public void addNewStock(@RequestBody Stock stock)
+    @PostMapping()
+//    public void addNewStock(@RequestBody Stock stock)
+//    {
+//        stockService.addNewStock(stock);
+//    }
+    public String stockSubmit(@ModelAttribute Stock stock, Model model)
     {
         stockService.addNewStock(stock);
+        return stockForm(model);
     }
 }
