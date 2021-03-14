@@ -33,10 +33,11 @@ public class StockService
         Optional<Stock> stockByTicker = stockRepository.findStockByTicker(stock.getTicker());
         if (stockByTicker.isPresent())
         {
-            String errorMessage = String.format("The %s ticker already exists!", stock.getTicker());
-            throw new IllegalStateException(errorMessage);
+            System.out.println(String.format("The %s ticker already exists!", stock.getTicker()));
         }
-
-        stockRepository.save(stock);
+        else
+        {
+            stockRepository.save(stock);
+        }
     }
 }

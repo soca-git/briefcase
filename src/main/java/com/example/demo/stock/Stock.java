@@ -1,9 +1,11 @@
 package com.example.demo.stock;
 
+import com.example.demo.portfoliostock.PortfolioStock;
+
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name="stock")
 public class Stock
 {
     // Setup automatic generation of stock ids
@@ -19,9 +21,16 @@ public class Stock
             strategy = GenerationType.SEQUENCE,
             generator = "stock_sequence"
     )
+    @Column(name="id")
     private Long id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="ticker")
     private String ticker;
+
+    @Column(name="price")
     private int price;
 
     public Stock() {
