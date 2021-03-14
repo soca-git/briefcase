@@ -2,9 +2,7 @@ package com.example.demo.portfoliostock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PortfolioStockService
@@ -22,24 +20,26 @@ public class PortfolioStockService
         return portfolioStockRepository.findAll();
     }
 
-    public void addNewPortfolioStock(PortfolioStock pStock)
+    public PortfolioStock getOrCreatePortfolioStock(PortfolioStock pStock)
     {
-        Optional<PortfolioStock> pStockByOwner = portfolioStockRepository.findPortfolioStockByOwnerANDStockTicker(
-                pStock.getOwner().getName(), pStock.getStock().getTicker()
+        PortfolioStock portfolioStockByOwnerAndStock = portfolioStockRepository.findPortfolioStockByOwnerANDStock(
+                pStock.getOwner(), pStock.getStock()
         );
-        if (pStockByOwner.isPresent())
+        if (portfolioStockByOwnerAndStock != null)
         {
             System.out.println(
                     String.format(
                             "The %s stock already exists for owner %s!",
                             pStock.getStock().getName(),
-                            pStock.getOwner()
+                            pStock.getOwner().getName()
                     )
             );
+            return portfolioStockByOwnerAndStock;
         }
         else
         {
             portfolioStockRepository.save(pStock);
+            return pStock;
         }
     }
 }

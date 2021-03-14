@@ -3,7 +3,6 @@ package com.example.demo.stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 // Spring 'bean' for auto-wire to
 // stock controller.
@@ -28,16 +27,18 @@ public class StockService
         return stockRepository.findAll();
     }
 
-    public void addNewStock(Stock stock)
+    public Stock getOrCreateStock(Stock stock)
     {
-        Optional<Stock> stockByTicker = stockRepository.findStockByTicker(stock.getTicker());
-        if (stockByTicker.isPresent())
+        Stock stockByTicker = stockRepository.findStockByTicker(stock.getTicker());
+        if (stockByTicker != null)
         {
             System.out.println(String.format("The %s ticker already exists!", stock.getTicker()));
+            return stockByTicker;
         }
         else
         {
             stockRepository.save(stock);
+            return stock;
         }
     }
 }

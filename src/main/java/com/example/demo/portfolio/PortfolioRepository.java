@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long>
 {
     @Query("SELECT p FROM Portfolio p WHERE p.name = ?1")
-    Optional<Portfolio> findPortfolioByName(String name);
+    Portfolio findPortfolioByName(String name);
 }

@@ -2,9 +2,7 @@ package com.example.demo.portfolio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PortfolioService
@@ -22,16 +20,18 @@ public class PortfolioService
         return portfolioRepository.findAll();
     }
 
-    public void addNewPortfolio(Portfolio portfolio)
+    public Portfolio getOrCreatePortfolio(Portfolio portfolio)
     {
-        Optional<Portfolio> portfolioByName = portfolioRepository.findPortfolioByName(portfolio.getName());
-        if (portfolioByName.isPresent())
+        Portfolio portfolioByName = portfolioRepository.findPortfolioByName(portfolio.getName());
+        if (portfolioByName != null)
         {
             System.out.println(String.format("The %s portfolio already exists!", portfolio.getName()));
+            return portfolioByName;
         }
         else
         {
             portfolioRepository.save(portfolio);
+            return portfolio;
         }
     }
 }
