@@ -7,12 +7,12 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["AAPL", "QCOM", "NIO"],
+    labels: pstock_tickers,
     datasets: [{
-      label: "Value",
-      data: [2500, 10000, 5000],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      labels: pstock_tickers,
+      data: pstock_holdings,
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#4e73df', '#1cc88a', '#36b9cc', '#4e73df', '#1cc88a', '#36b9cc'],
+      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#2e59d9', '#17a673', '#2c9faf', '#2e59d9', '#17a673', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
@@ -29,13 +29,14 @@ var myPieChart = new Chart(ctx, {
       caretPadding: 10,
       callbacks: {
         label: function(tooltipItem, chart) {
-          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          var datasetLabel = chart.datasets[0].labels[tooltipItem['index']] || '';
           return datasetLabel + ': $' + number_format(chart.datasets[0].data[tooltipItem['index']]);
         }
       }
     },
     legend: {
-      display: false
+      display: true,
+      position: 'bottom'
     },
     cutoutPercentage: 80,
   },

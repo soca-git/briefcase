@@ -36,7 +36,7 @@ public class PortfolioController
     {
         model.addAttribute("pstock", new PortfolioStock());
         model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks());
-        return "portfolio";
+        return "index";
     }
 
     // RequestBody maps the JSON body received in the

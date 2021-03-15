@@ -32,10 +32,10 @@ var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["AAPL", "QCOM", "NIO"],
+    labels: pstock_tickers,
     datasets: [{
-      label: "Price",
-      data: [2500, 10000, 5000],
+      label: "Value",
+      data: pstock_holdings,
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
@@ -68,8 +68,8 @@ var myBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 12000,
-          maxTicksLimit: 100,
+          max: Math.max(...pstock_holdings),
+          maxTicksLimit: 10,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {

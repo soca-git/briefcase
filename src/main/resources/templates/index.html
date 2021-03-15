@@ -12,12 +12,12 @@
     <title>Portfolio Demo</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 
 </head>
 
@@ -178,17 +178,12 @@
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
                                     </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> AAPL
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> QCOM
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> NIO
-                                        </span>
-                                    </div>
+<!--                                    <div class="mt-4 text-center small">-->
+<!--                                        <span class="mr-2" th:each = "pstock: ${pstocks}">-->
+<!--                                            <i class="fas fa-circle text-primary"></i>-->
+<!--                                            <span th:text="${pstock.stock.ticker}"></span>-->
+<!--                                        </span>-->
+<!--                                    </div>-->
                                     <hr>
                                     Styling for the pie chart can be found in the
                                     <code>/js/demo/chart-pie-demo.js</code> file.
@@ -215,8 +210,8 @@
                                         <td th:text="${pstock.stock.name}"></td>
                                         <td th:text="${pstock.stock.ticker}"></td>
                                         <td th:text="${pstock.owner.name}"></td>
-                                        <td th:text="${pstock.stock.price}"></td>
-                                        <td th:text="'$' + ${pstock.quantity}"></td>
+                                        <td th:text="'$' + ${pstock.stock.price}"></td>
+                                        <td th:text="${pstock.quantity}"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -265,23 +260,40 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <script th:inline="javascript">
+        var pstocks = /*[[${pstocks}]]*/;
+
+        // Generate chart arrays
+        var pstock_tickers = []
+        var pstock_prices = []
+        var pstock_quantities = []
+        var pstock_holdings = []
+        for (i = 0; i < pstocks.length; i++)
+        {
+            pstock_tickers.push(pstocks[i].stock.ticker)
+            pstock_prices.push(pstocks[i].stock.price)
+            pstock_quantities.push(pstocks[i].quantity)
+            pstock_holdings.push(pstocks[i].stock.price * pstocks[i].quantity)
+        }
+    </script>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
     <!--Custom scripts for all pages-->
-    <script src="js/sb-admin-2.js"></script>
+    <script th:src="@{/js/sb-admin-2.js}"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/demo/chart-bar-demo.js"></script>
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-bar-demo.js}"></script>
 
 </body>
 
