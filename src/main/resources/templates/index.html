@@ -40,14 +40,24 @@
             <!-- Divider -->
             <hr class="mb-4 sidebar-divider">
 
-            <!-- Add Stock Form -->
+            <!-- Select/Create Portfolio -->
             <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio}" method="post">
                 <!-- Heading -->
-                <h6 class="text-white">Add a Stock:</h6>
+                <h6 class="text-white">Select/Create Portfolio:</h6>
                 <div class="form-group">
-                    <label class="text-info" for="portfolioInput">Portfolio</label>
-                    <input type="text" th:name="portfolio_name" class="form-control" id="portfolioInput" placeholder="Enter portfolio name">
+                    <!--<label class="text-info" for="portfolioInput">Portfolio</label>-->
+                    <input type="text" th:name="name" class="form-control" id="portfolioInput" placeholder="Enter portfolio name">
                 </div>
+                <button type="submit" class="btn btn-success" value="Submit">Submit</button>
+            </form>
+
+            <!-- Divider -->
+            <hr class="mt-4 mb-4 sidebar-divider">
+
+            <!-- Add Stock Form -->
+            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio/add-stock?name=}+${portfolio_name}" method="post">
+                <!-- Heading -->
+                <h6 class="text-white">Add a Stock:</h6>
                 <div class="form-group">
                     <label class="text-info" for="stockInput">Stock</label>
                     <input type="text" th:name="stock_name" class="form-control" id="stockInput" placeholder="Enter stock name">
@@ -82,7 +92,7 @@
                         <!-- Page Heading -->
                         <div class="nav-item ml-4 d-sm-flex align-items-center justify-content-flex-start">
                             <i class="mb-1 fas fa-chart-pie"></i>
-                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio Dashboard</h1>
+                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio Dashboard (<span th:text="${portfolio_name}"></span>)</h1>
                         </div>
                     </ul>
                 </nav>

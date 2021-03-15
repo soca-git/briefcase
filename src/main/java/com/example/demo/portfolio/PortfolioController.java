@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(path="api/v1/portfolio")
@@ -32,23 +33,36 @@ public class PortfolioController
     }
 
     @GetMapping()
-    public String stockForm(Model model)
+    public String portfolioView(Model model, @RequestParam(name="name", required = false) String portfolio_name)
     {
-        model.addAttribute("pstock", new PortfolioStock());
-        model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks());
+        if (portfolio_name != null)
+        {
+            Portfolio portfolio = new Portfolio(portfolio_name);
+            portfolio = this.portfolioService.getOrCreatePortfolio(portfolio);
+
+            model.addAttribute("portfolio_name", portfolio_name);
+            model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks());
+        }
         return "index";
+    }
+
+    @PostMapping()
+    public String selectPortfolio(Model model, RedirectAttributes redirectAttributes, @RequestParam(name="name") String portfolio_name)
+    {
+        redirectAttributes.addAttribute("name", portfolio_name);
+        return "redirect:/api/v1/portfolio";
     }
 
     // RequestBody maps the JSON body received in the
     // post request to a Stock object for insertion
     // into the database.
-    @PostMapping()
-    public String stockSubmit(
-            @RequestParam(value="portfolio_name") String portfolio_name,
+    @PostMapping("/add-stock")
+    public String addStock(
+            Model model,
+            @RequestParam(name="name") String portfolio_name,
             @RequestParam(value="stock_name") String stock_name,
             @RequestParam(value="ticker") String ticker,
-            @RequestParam(value="quantity") int quantity,
-            Model model
+            @RequestParam(value="quantity") int quantity
     )
     {
         Portfolio portfolio = new Portfolio(portfolio_name);
@@ -60,6 +74,6 @@ public class PortfolioController
         PortfolioStock portfolioStock = new PortfolioStock(portfolio, stock, quantity);
         portfolioStock = this.portfolioStockService.getOrCreatePortfolioStock(portfolioStock);
 
-        return stockForm(model);
+        return portfolioView(model, portfolio_name);
     }
 }
