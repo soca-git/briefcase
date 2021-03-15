@@ -19,14 +19,6 @@ public class StockService
         this.stockRepository = stockRepository;
     }
 
-    public List<Stock> getStocks()
-    {
-        // Now that we have added the JPA repository for the database,
-        // we have access to JPA methods available for handling
-        // database operations.
-        return stockRepository.findAll();
-    }
-
     public Stock getOrCreateStock(Stock stock)
     {
         Stock stockByTicker = stockRepository.findStockByTicker(stock.getTicker());
@@ -40,5 +32,13 @@ public class StockService
             stockRepository.save(stock);
             return stock;
         }
+    }
+
+    public List<Stock> getStocks()
+    {
+        // Now that we have added the JPA repository for the database,
+        // we have access to JPA methods available for handling
+        // database operations.
+        return stockRepository.findAll();
     }
 }

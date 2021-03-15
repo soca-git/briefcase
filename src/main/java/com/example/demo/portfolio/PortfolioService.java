@@ -15,11 +15,6 @@ public class PortfolioService
         this.portfolioRepository = portfolioRepository;
     }
 
-    public List<Portfolio> getPortfolios()
-    {
-        return portfolioRepository.findAll();
-    }
-
     public Portfolio getOrCreatePortfolio(Portfolio portfolio)
     {
         Portfolio portfolioByName = portfolioRepository.findPortfolioByName(portfolio.getName());
@@ -33,5 +28,10 @@ public class PortfolioService
             portfolioRepository.save(portfolio);
             return portfolio;
         }
+    }
+
+    public List<Portfolio> getPortfolios()
+    {
+        return portfolioRepository.findAll();
     }
 }

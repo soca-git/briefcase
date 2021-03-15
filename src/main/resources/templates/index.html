@@ -29,12 +29,11 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <!-- Sidebar - Logo -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Portfolio Demo</div>
             </a>
 
             <!-- Divider -->
@@ -92,7 +91,7 @@
                         <!-- Page Heading -->
                         <div class="nav-item ml-4 d-sm-flex align-items-center justify-content-flex-start">
                             <i class="mb-1 fas fa-chart-pie"></i>
-                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio Dashboard (<span th:text="${portfolio_name}"></span>)</h1>
+                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio (<span th:text="${portfolio_name}"></span>)</h1>
                         </div>
                     </ul>
                 </nav>
@@ -103,15 +102,15 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <!-- Total Portfolio Value -->
+                        <!-- Total Holdings -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Portfolio Value</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                                Total Holdings</div>
+                                            <div id="total_holdings" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -121,15 +120,15 @@
                             </div>
                         </div>
 
-                        <!-- Average Stock Price -->
+                        <!-- Average Holdings -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Average Stock Price</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                                Average Holdings</div>
+                                            <div id="average_holdings" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -147,7 +146,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Largest Position</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">65%</div>
+                                            <div id="largest_position_percentage" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-percent fa-2x text-gray-300"></i>
@@ -270,10 +269,12 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Portfolio data handling-->
     <script th:inline="javascript">
+        // Convert data to usable javascript object.
         var pstocks = /*[[${pstocks}]]*/;
 
-        // Generate chart arrays
+        // Generate data arrays.
         var pstock_tickers = []
         var pstock_prices = []
         var pstock_quantities = []
@@ -286,6 +287,10 @@
             pstock_holdings.push(pstocks[i].stock.price * pstocks[i].quantity)
         }
     </script>
+
+    <!-- Front-end portfolio calculations-->
+    <script th:src="@{/js/calculate.js}"></script>
+    <script th:src="@{/js/update.js}"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>

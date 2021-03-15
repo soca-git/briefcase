@@ -41,7 +41,7 @@ public class PortfolioController
             portfolio = this.portfolioService.getOrCreatePortfolio(portfolio);
 
             model.addAttribute("portfolio_name", portfolio_name);
-            model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks());
+            model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks(portfolio));
         }
         return "index";
     }

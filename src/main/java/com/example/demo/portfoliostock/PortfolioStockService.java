@@ -1,5 +1,6 @@
 package com.example.demo.portfoliostock;
 
+import com.example.demo.portfolio.Portfolio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,11 +14,6 @@ public class PortfolioStockService
     public PortfolioStockService(PortfolioStockRepository portfolioStockRepository)
     {
         this.portfolioStockRepository = portfolioStockRepository;
-    }
-
-    public List<PortfolioStock> getPortfolioStocks()
-    {
-        return portfolioStockRepository.findAll();
     }
 
     public PortfolioStock getOrCreatePortfolioStock(PortfolioStock pStock)
@@ -41,5 +37,10 @@ public class PortfolioStockService
             portfolioStockRepository.save(pStock);
             return pStock;
         }
+    }
+
+    public List<PortfolioStock> getPortfolioStocks(Portfolio portfolio)
+    {
+        return portfolioStockRepository.findPortfolioStocksByOwner(portfolio);
     }
 }
