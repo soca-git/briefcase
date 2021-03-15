@@ -39,6 +39,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>pl.zankowski</groupId>
+			<artifactId>iextrading4j-all</artifactId>
+			<version>3.4.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

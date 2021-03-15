@@ -60,7 +60,6 @@ public class PortfolioController
     public String addStock(
             Model model,
             @RequestParam(name="name") String portfolio_name,
-            @RequestParam(value="stock_name") String stock_name,
             @RequestParam(value="ticker") String ticker,
             @RequestParam(value="quantity") int quantity
     )
@@ -68,8 +67,7 @@ public class PortfolioController
         Portfolio portfolio = new Portfolio(portfolio_name);
         portfolio = this.portfolioService.getOrCreatePortfolio(portfolio);
 
-        Stock stock = new Stock(stock_name, ticker, 100);
-        stock = this.stockService.getOrCreateStock(stock);
+        Stock stock = this.stockService.getOrCreateStock(ticker);
 
         PortfolioStock portfolioStock = new PortfolioStock(portfolio, stock, quantity);
         portfolioStock = this.portfolioStockService.getOrCreatePortfolioStock(portfolioStock);

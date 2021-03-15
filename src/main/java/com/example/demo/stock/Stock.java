@@ -1,7 +1,5 @@
 package com.example.demo.stock;
 
-import com.example.demo.portfoliostock.PortfolioStock;
-
 import javax.persistence.*;
 
 @Entity
@@ -31,19 +29,19 @@ public class Stock
     private String ticker;
 
     @Column(name="price")
-    private int price;
+    private double price;
 
     public Stock() {
     }
 
-    public Stock(Long id, String name, String ticker, int price) {
+    public Stock(Long id, String name, String ticker, double price) {
         this.id = id;
         this.name = name;
         this.ticker = ticker;
         this.price = price;
     }
 
-    public Stock(String name, String ticker, int price) {
+    public Stock(String name, String ticker, double price) {
         this.name = name;
         this.ticker = ticker;
         this.price = price;
@@ -61,7 +59,7 @@ public class Stock
         return ticker;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -77,7 +75,7 @@ public class Stock
         this.ticker = ticker;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
