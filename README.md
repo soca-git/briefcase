@@ -7,8 +7,12 @@
 > in the form of charts, tables and metrics.  
 
 > All market data is provided by [IEX Cloud](https://iexcloud.io/docs/api/).
+> 
+> Sample Portfolio:  
+> https://briefcase-app.herokuapp.com/api/v1/portfolio?name=example
 
 ![dashboard](dashboard.png)
+
 
 ## Application Features
 
@@ -30,11 +34,12 @@
 - [x] Implement Demo Application using Spring framework.
 - [x] Implement version control through Git/GitHub.
 - [ ] Create project issues on GitHub to manage project timeline.
-- [ ] Deploy Application to Heroku.
+- [x] Deploy Application to Heroku.
 - [ ] Implement Test Suite for backend using JUnit.
 - [ ] Study/research CI/CD.
 - [ ] Implement CI/CD pipeline.
 - [ ] Investigate front-end framework/libraries.
+
 
 ## Technologies:
 
