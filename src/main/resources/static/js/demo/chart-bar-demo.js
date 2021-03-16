@@ -32,10 +32,10 @@ var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: pstock_tickers,
+    labels: pitem_tickers,
     datasets: [{
       label: "Value",
-      data: pstock_holdings,
+      data: pitem_holdings,
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
@@ -68,7 +68,7 @@ var myBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: Math.max(...pstock_holdings),
+          max: Math.max(...pitem_holdings),
           maxTicksLimit: 10,
           padding: 10,
           // Include a dollar sign in the ticks

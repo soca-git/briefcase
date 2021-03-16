@@ -1,7 +1,8 @@
 package com.example.demo.portfolio;
 
-import com.example.demo.portfoliostock.PortfolioStock;
-import com.example.demo.portfoliostock.PortfolioStockService;
+import com.example.demo.crypto.Crypto;
+import com.example.demo.crypto.CryptoService;
+import com.example.demo.portfolioitem.PortfolioItemService;
 import com.example.demo.stock.Stock;
 import com.example.demo.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PortfolioController
 {
     private final PortfolioService portfolioService;
-    private final PortfolioStockService portfolioStockService;
+    private final PortfolioItemService portfolioItemService;
     private final StockService stockService;
+    private final CryptoService cryptoService;
 
     // Autowired is used for dependency injection.
     // StudentService is instantiated for injection in the
@@ -25,11 +27,15 @@ public class PortfolioController
     // constructor, but apparently this is bad.
     // Read up about dependency injection.
     @Autowired
-    public PortfolioController(PortfolioService portfolioService, PortfolioStockService portfolioStockService, StockService stockService)
+    public PortfolioController(
+            PortfolioService portfolioService, PortfolioItemService portfolioItemService,
+            StockService stockService, CryptoService cryptoService
+    )
     {
         this.portfolioService = portfolioService;
-        this.portfolioStockService = portfolioStockService;
+        this.portfolioItemService = portfolioItemService;
         this.stockService = stockService;
+        this.cryptoService = cryptoService;
     }
 
     // Portfolio view.
@@ -40,7 +46,7 @@ public class PortfolioController
         {
             Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
             model.addAttribute("portfolio_name", portfolio_name);
-            model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks(portfolio));
+            model.addAttribute("pitems", portfolioItemService.getPortfolioItems(portfolio));
         }
         return "index";
     }
@@ -59,12 +65,27 @@ public class PortfolioController
             Model model,
             @RequestParam(name="name") String portfolio_name,
             @RequestParam(value="ticker") String ticker,
-            @RequestParam(value="quantity") int quantity
+            @RequestParam(value="quantity") double quantity
     )
     {
         Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
         Stock stock = this.stockService.getOrCreateStock(ticker);
-        PortfolioStock portfolioStock = this.portfolioStockService.getOrCreatePortfolioStock(portfolio, stock, quantity);
+        this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, quantity);
+        return portfolioView(model, portfolio_name);
+    }
+
+    // Add crypto form.
+    @PostMapping("/add-crypto")
+    public String addCrypto(
+            Model model,
+            @RequestParam(name="name") String portfolio_name,
+            @RequestParam(value="ticker") String ticker,
+            @RequestParam(value="quantity") double quantity
+    )
+    {
+        Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
+        Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker);
+        this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, quantity);
         return portfolioView(model, portfolio_name);
     }
 }

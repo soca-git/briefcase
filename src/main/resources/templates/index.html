@@ -58,12 +58,31 @@
                 <!-- Heading -->
                 <h6 class="text-white">Add a Stock:</h6>
                 <div class="form-group">
-                    <label class="text-info" for="tickerInput">Ticker</label>
-                    <input type="text" th:name="ticker" class="form-control" id="tickerInput" placeholder="Enter stock ticker">
+                    <label class="text-info" for="stockTickerInput">Ticker</label>
+                    <input type="text" th:name="ticker" class="form-control" id="stockTickerInput" placeholder="Enter stock ticker">
                 </div>
                 <div class="form-group">
-                    <label class="text-info" for="quantityInput">Quantity</label>
-                    <input type="text" th:name="quantity" class="form-control" id="quantityInput" placeholder="Enter stock quantity">
+                    <label class="text-info" for="stockQuantityInput">Quantity</label>
+                    <input type="text" th:name="quantity" class="form-control" id="stockQuantityInput" placeholder="Enter stock quantity">
+                </div>
+                <button type="submit" class="btn btn-success" value="Submit">Add</button>
+                <button type="reset" class="btn btn-warning" value="Reset">Reset</button>
+            </form>
+
+            <!-- Divider -->
+            <hr class="mt-4 mb-4 sidebar-divider">
+
+            <!-- Add Crypto Form -->
+            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio/add-crypto?name=}+${portfolio_name}" method="post">
+                <!-- Heading -->
+                <h6 class="text-white">Add a Stock:</h6>
+                <div class="form-group">
+                    <label class="text-info" for="cryptoTickerInput">Ticker</label>
+                    <input type="text" th:name="ticker" class="form-control" id="cryptoTickerInput" placeholder="Enter crypto ticker">
+                </div>
+                <div class="form-group">
+                    <label class="text-info" for="cryptoQuantityInput">Quantity</label>
+                    <input type="text" th:name="quantity" class="form-control" id="cryptoQuantityInput" placeholder="Enter crypto quantity">
                 </div>
                 <button type="submit" class="btn btn-success" value="Submit">Add</button>
                 <button type="reset" class="btn btn-warning" value="Reset">Reset</button>
@@ -184,9 +203,9 @@
                                         <canvas id="myPieChart"></canvas>
                                     </div>
 <!--                                    <div class="mt-4 text-center small">-->
-<!--                                        <span class="mr-2" th:each = "pstock: ${pstocks}">-->
+<!--                                        <span class="mr-2" th:each = "pitem: ${pitems}">-->
 <!--                                            <i class="fas fa-circle text-primary"></i>-->
-<!--                                            <span th:text="${pstock.stock.ticker}"></span>-->
+<!--                                            <span th:text="${pitem.item.ticker}"></span>-->
 <!--                                        </span>-->
 <!--                                    </div>-->
                                     <hr>
@@ -208,11 +227,11 @@
                                     <th scope="col">Quantity</th>
                                 </thead>
                                 <tbody>
-                                    <tr th:each = "pstock: ${pstocks}">
-                                        <th scope="row" th:text="${pstock.stock.name}"></th>
-                                        <td th:text="${pstock.stock.ticker}"></td>
-                                        <td th:text="'$' + ${pstock.stock.price}"></td>
-                                        <td th:text="${pstock.quantity}"></td>
+                                    <tr th:each = "pitem: ${pitems}">
+                                        <th scope="row" th:text="${pitem.item.name}"></th>
+                                        <td th:text="${pitem.item.ticker}"></td>
+                                        <td th:text="'$' + ${pitem.item.price}"></td>
+                                        <td th:text="${pitem.quantity}"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -265,19 +284,19 @@
     <!-- Portfolio data handling-->
     <script th:inline="javascript">
         // Convert data to usable javascript object.
-        var pstocks = /*[[${pstocks}]]*/;
+        var pitems = /*[[${pitems}]]*/;
 
         // Generate data arrays.
-        var pstock_tickers = []
-        var pstock_prices = []
-        var pstock_quantities = []
-        var pstock_holdings = []
-        for (i = 0; i < pstocks.length; i++)
+        var pitem_tickers = []
+        var pitem_prices = []
+        var pitem_quantities = []
+        var pitem_holdings = []
+        for (i = 0; i < pitems.length; i++)
         {
-            pstock_tickers.push(pstocks[i].stock.ticker)
-            pstock_prices.push(pstocks[i].stock.price)
-            pstock_quantities.push(pstocks[i].quantity)
-            pstock_holdings.push(pstocks[i].stock.price * pstocks[i].quantity)
+            pitem_tickers.push(pitems[i].item.ticker)
+            pitem_prices.push(pitems[i].item.price)
+            pitem_quantities.push(pitems[i].quantity)
+            pitem_holdings.push(pitems[i].item.price * pitems[i].quantity)
         }
     </script>
 

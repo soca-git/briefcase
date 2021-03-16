@@ -1,7 +1,7 @@
 package com.example.demo.portfolio;
 
 import com.example.demo.iexclient.IEXClient;
-import com.example.demo.portfoliostock.PortfolioStockRepository;
+import com.example.demo.portfolioitem.PortfolioItemRepository;
 import com.example.demo.stock.StockRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ public class PortfolioConfig
 {
 
     @Bean
-    CommandLineRunner commandLineRunner(PortfolioRepository portfolioRepository, StockRepository stockRepository, PortfolioStockRepository portfolioStockRepository)
+    CommandLineRunner commandLineRunner(PortfolioRepository portfolioRepository, StockRepository stockRepository, PortfolioItemRepository portfolioItemRepository)
     {
         return args -> {
 

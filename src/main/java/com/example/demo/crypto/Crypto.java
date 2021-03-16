@@ -1,23 +1,29 @@
-package com.example.demo.stock;
+package com.example.demo.crypto;
 
 import com.example.demo.portfolioitem.Item;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="stock")
-public class Stock extends Item
+@Table(name="crypto")
+public class Crypto extends Item
 {
-    public Stock() {
+    public Crypto() {
     }
 
-    public Stock(String name, String ticker, double price) {
+    public Crypto(String ticker, double price) {
+        this.name = "Cryptocurrency - " + ticker;
+        this.ticker = ticker;
+        this.price = price;
+    }
+
+    public Crypto(String name, String ticker, double price) {
         this.name = name;
         this.ticker = ticker;
         this.price = price;
     }
 
-    public Stock(Long id, String name, String ticker, double price) {
+    public Crypto(Long id, String name, String ticker, double price) {
         this.id = id;
         this.name = name;
         this.ticker = ticker;
@@ -26,7 +32,7 @@ public class Stock extends Item
 
     @Override
     public String toString() {
-        return "Stock{" +
+        return "Crypto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ticker='" + ticker + '\'' +
