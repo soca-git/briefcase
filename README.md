@@ -8,7 +8,7 @@
 
 > All Market data will be served through the [IEX Cloud API](https://iexcloud.io/docs/api/).
 
-![dashboard](https://github.com/soca-git/briefcase/dashboard.jpg)
+![dashboard](dashboard.png)
 
 ## Application Features
 
