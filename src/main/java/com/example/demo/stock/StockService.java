@@ -40,7 +40,7 @@ public class StockService
 
     public Stock createStock(String ticker)
     {
-        Quote quote = iexClient.getQuote(ticker);
+        Quote quote = iexClient.getStockQuote(ticker);
         double price = quote.getLatestPrice().doubleValue();
         String name = quote.getCompanyName();
         Stock stock = new Stock(name, ticker, price);

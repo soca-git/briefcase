@@ -1,6 +1,7 @@
 package com.example.demo.portfoliostock;
 
 import com.example.demo.portfolio.Portfolio;
+import com.example.demo.stock.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,27 +17,33 @@ public class PortfolioStockService
         this.portfolioStockRepository = portfolioStockRepository;
     }
 
-    public PortfolioStock getOrCreatePortfolioStock(PortfolioStock pStock)
+    public PortfolioStock getOrCreatePortfolioStock(Portfolio portfolio, Stock stock, int quantity)
     {
         PortfolioStock portfolioStockByOwnerAndStock = portfolioStockRepository.findPortfolioStockByOwnerANDStock(
-                pStock.getOwner(), pStock.getStock()
+                portfolio, stock
         );
         if (portfolioStockByOwnerAndStock != null)
         {
             System.out.println(
                     String.format(
                             "The %s stock already exists for owner %s!",
-                            pStock.getStock().getName(),
-                            pStock.getOwner().getName()
+                            portfolioStockByOwnerAndStock.getStock().getName(),
+                            portfolioStockByOwnerAndStock.getOwner().getName()
                     )
             );
             return portfolioStockByOwnerAndStock;
         }
         else
         {
-            portfolioStockRepository.save(pStock);
-            return pStock;
+            return createPortfolioStock(portfolio, stock, quantity);
         }
+    }
+
+    public PortfolioStock createPortfolioStock(Portfolio portfolio, Stock stock, int quantity)
+    {
+        PortfolioStock portfolioStock = new PortfolioStock(portfolio, stock, quantity);
+        this.portfolioStockRepository.save(portfolioStock);
+        return portfolioStock;
     }
 
     public List<PortfolioStock> getPortfolioStocks(Portfolio portfolio)

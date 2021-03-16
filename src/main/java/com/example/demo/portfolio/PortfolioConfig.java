@@ -23,8 +23,11 @@ public class PortfolioConfig
 
             // Test IEX Cloud API.
             IEXClient client = new IEXClient();
-            Quote quote = client.getQuote("AAPL");
-            System.out.println(quote.getLatestPrice());
+            System.out.println(String.format("API Version: %s", client.getVersion()));
+            Quote stockQuote = client.getStockQuote("AAPL");
+            System.out.println(stockQuote);
+            Quote cryptoQuote = client.getCryptoQuote("BTCUSDT");
+            System.out.println(cryptoQuote);
         };
     }
 }

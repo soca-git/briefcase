@@ -15,19 +15,25 @@ public class PortfolioService
         this.portfolioRepository = portfolioRepository;
     }
 
-    public Portfolio getOrCreatePortfolio(Portfolio portfolio)
+    public Portfolio getOrCreatePortfolio(String portfolio_name)
     {
-        Portfolio portfolioByName = portfolioRepository.findPortfolioByName(portfolio.getName());
+        Portfolio portfolioByName = portfolioRepository.findPortfolioByName(portfolio_name);
         if (portfolioByName != null)
         {
-            System.out.println(String.format("The %s portfolio already exists!", portfolio.getName()));
+            System.out.println(String.format("The %s portfolio already exists!", portfolioByName.getName()));
             return portfolioByName;
         }
         else
         {
-            portfolioRepository.save(portfolio);
-            return portfolio;
+            return createPortfolio(portfolio_name);
         }
+    }
+
+    public Portfolio createPortfolio(String portfolio_name)
+    {
+        Portfolio portfolio = new Portfolio(portfolio_name);
+        portfolioRepository.save(portfolio);
+        return portfolio;
     }
 
     public List<Portfolio> getPortfolios()

@@ -32,7 +32,7 @@
             <!-- Sidebar - Logo -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-rocket"></i>
                 </div>
             </a>
 
@@ -87,7 +87,7 @@
                         <!-- Page Heading -->
                         <div class="nav-item ml-4 d-sm-flex align-items-center justify-content-flex-start">
                             <i class="mb-1 fas fa-chart-pie"></i>
-                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio (<span th:text="${portfolio_name}"></span>)</h1>
+                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio [<span th:text="${portfolio_name}"></span>]</h1>
                         </div>
                     </ul>
                 </nav>
@@ -202,19 +202,15 @@
                         <div class="col-xl">
                             <table class="table table-light rounded shadow">
                                 <thead>
-                                    <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Ticker</th>
-                                    <th scope="col">Portfolio</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                 </thead>
                                 <tbody>
                                     <tr th:each = "pstock: ${pstocks}">
-                                        <th scope="row" th:text="${pstock.id}"></th>
-                                        <td th:text="${pstock.stock.name}"></td>
+                                        <th scope="row" th:text="${pstock.stock.name}"></th>
                                         <td th:text="${pstock.stock.ticker}"></td>
-                                        <td th:text="${pstock.owner.name}"></td>
                                         <td th:text="'$' + ${pstock.stock.price}"></td>
                                         <td th:text="${pstock.quantity}"></td>
                                     </tr>
@@ -233,6 +229,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p>Stock prices and other information are retrieved from the IEX cloud financial markets API.</p>
+                                    <a href="https://iexcloud.io">Data provided by IEX Cloud</a>
                                 </div>
                             </div>
                         </div>

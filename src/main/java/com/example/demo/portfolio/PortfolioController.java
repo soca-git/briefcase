@@ -32,20 +32,20 @@ public class PortfolioController
         this.stockService = stockService;
     }
 
+    // Portfolio view.
     @GetMapping()
     public String portfolioView(Model model, @RequestParam(name="name", required = false) String portfolio_name)
     {
         if (portfolio_name != null)
         {
-            Portfolio portfolio = new Portfolio(portfolio_name);
-            portfolio = this.portfolioService.getOrCreatePortfolio(portfolio);
-
+            Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
             model.addAttribute("portfolio_name", portfolio_name);
             model.addAttribute("pstocks", portfolioStockService.getPortfolioStocks(portfolio));
         }
         return "index";
     }
 
+    // Select portfolio form.
     @PostMapping()
     public String selectPortfolio(Model model, RedirectAttributes redirectAttributes, @RequestParam(name="name") String portfolio_name)
     {
@@ -53,9 +53,7 @@ public class PortfolioController
         return "redirect:/api/v1/portfolio";
     }
 
-    // RequestBody maps the JSON body received in the
-    // post request to a Stock object for insertion
-    // into the database.
+    // Add stock form.
     @PostMapping("/add-stock")
     public String addStock(
             Model model,
@@ -64,14 +62,9 @@ public class PortfolioController
             @RequestParam(value="quantity") int quantity
     )
     {
-        Portfolio portfolio = new Portfolio(portfolio_name);
-        portfolio = this.portfolioService.getOrCreatePortfolio(portfolio);
-
+        Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
         Stock stock = this.stockService.getOrCreateStock(ticker);
-
-        PortfolioStock portfolioStock = new PortfolioStock(portfolio, stock, quantity);
-        portfolioStock = this.portfolioStockService.getOrCreatePortfolioStock(portfolioStock);
-
+        PortfolioStock portfolioStock = this.portfolioStockService.getOrCreatePortfolioStock(portfolio, stock, quantity);
         return portfolioView(model, portfolio_name);
     }
 }
