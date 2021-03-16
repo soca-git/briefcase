@@ -6,7 +6,7 @@
 > A dashboard will present the user with an informative overview of their current holdings,  
 > in the form of charts, tables and metrics.  
 
-> All Market data will be served through the [IEX Cloud API](https://iexcloud.io/docs/api/).
+> All market data is provided by [IEX Cloud](https://iexcloud.io/docs/api/).
 
 ![dashboard](dashboard.png)
 
