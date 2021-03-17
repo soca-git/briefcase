@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio Demo</title>
+    <title>Briefcase Demo</title>
 
     <!-- Custom fonts for this template-->
     <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -32,7 +32,7 @@
             <!-- Sidebar - Logo -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-rocket"></i>
+                    <i class="fas fa-briefcase"></i>
                 </div>
             </a>
 
@@ -66,7 +66,7 @@
                     <input type="text" th:name="quantity" class="form-control" id="stockQuantityInput" placeholder="Enter stock quantity">
                 </div>
                 <button type="submit" class="btn btn-success" value="Submit">Add</button>
-                <button type="reset" class="btn btn-warning" value="Reset">Reset</button>
+                <button type="reset" class="btn btn-muted" value="Reset">Reset</button>
             </form>
 
             <!-- Divider -->
@@ -85,7 +85,7 @@
                     <input type="text" th:name="quantity" class="form-control" id="cryptoQuantityInput" placeholder="Enter crypto quantity">
                 </div>
                 <button type="submit" class="btn btn-success" value="Submit">Add</button>
-                <button type="reset" class="btn btn-warning" value="Reset">Reset</button>
+                <button type="reset" class="btn btn-muted" value="Reset">Reset</button>
             </form>
 
             <!-- Divider -->
@@ -175,19 +175,18 @@
                     <!-- Content Row -->
 
                     <div class="row">
-                        <!-- Stock Positions Bar Chart -->
+                        <!-- Positions Bar Chart -->
                         <div class="col-xl-7 col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Stock Positions</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Positions</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
                                         <canvas id="myBarChart"></canvas>
                                     </div>
                                     <hr>
-                                    Styling for the bar chart can be found in the
-                                    <code>/js/demo/chart-bar-demo.js</code> file.
+                                    Bar chart <code>/js/demo/chart-bar-demo.js</code>
                                 </div>
                             </div>
                         </div>
@@ -202,15 +201,8 @@
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
                                     </div>
-<!--                                    <div class="mt-4 text-center small">-->
-<!--                                        <span class="mr-2" th:each = "pitem: ${pitems}">-->
-<!--                                            <i class="fas fa-circle text-primary"></i>-->
-<!--                                            <span th:text="${pitem.item.ticker}"></span>-->
-<!--                                        </span>-->
-<!--                                    </div>-->
                                     <hr>
-                                    Styling for the pie chart can be found in the
-                                    <code>/js/demo/chart-pie-demo.js</code> file.
+                                    Donut/Pie chart <code>/js/demo/chart-pie-demo.js</code>
                                 </div>
                             </div>
                         </div>
@@ -264,7 +256,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Portfolio Demo 2021</span>
+                        <span>Copyright &copy; Briefcase Demo 2021</span>
                     </div>
                 </div>
             </footer>
@@ -318,7 +310,6 @@
     <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
     <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
     <script th:src="@{/js/demo/chart-bar-demo.js}"></script>
 

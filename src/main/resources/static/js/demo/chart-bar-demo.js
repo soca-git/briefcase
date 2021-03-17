@@ -36,9 +36,9 @@ var myBarChart = new Chart(ctx, {
     datasets: [{
       label: "Value",
       data: pitem_holdings,
-      backgroundColor: "#4e73df",
-      hoverBackgroundColor: "#2e59d9",
-      borderColor: "#4e73df",
+      backgroundColor: "mediumspringgreen",
+      hoverBackgroundColor: "lightsalmon",
+      borderColor: "mediumspringgreen",
     }],
   },
   options: {
