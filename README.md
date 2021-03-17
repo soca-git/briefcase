@@ -39,6 +39,7 @@
 - [ ] Study/research CI/CD.
 - [ ] Implement CI/CD pipeline.
 - [ ] Investigate front-end framework/libraries.
+- [ ] Mobile friendly.
 
 
 ## Technologies:
