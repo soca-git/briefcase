@@ -68,8 +68,6 @@ var positionsBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: Math.max(...pitem_holdings),
-          maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
@@ -128,15 +126,21 @@ for (i = 0; i < pitem_total_pls.length; i++)
     if (pitem_total_pls[i] > 0)
     {
         datasets[0].backgroundColor.push("aquamarine");
-        datasets[0].hoverBackgroundColor.push("aquamarine");
+        datasets[0].hoverBackgroundColor.push("#4BD9A9");
         datasets[0].borderColor.push("aquamarine");
     }
     else
     {
         datasets[0].backgroundColor.push("firebrick");
-        datasets[0].hoverBackgroundColor.push("firebrick");
+        datasets[0].hoverBackgroundColor.push("#8C0606");
         datasets[0].borderColor.push("firebrick");
     }
+}
+
+var min_pls = 0;
+if (Math.min(...pitem_total_pls) < 0)
+{
+    min_pls = Math.min(...pitem_total_pls);
 }
 
 var ctx = document.getElementById("plsBarChart");
@@ -172,9 +176,7 @@ var plsBarChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: Math.min(...pitem_total_pls),
-          max: Math.max(...pitem_total_pls),
-          maxTicksLimit: 5,
+          min: min_pls,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
