@@ -1,6 +1,6 @@
 package com.example.demo.stock;
 
-import com.example.demo.portfolioitem.Item;
+import com.example.demo.item.Item;
 
 import javax.persistence.*;
 
@@ -11,16 +11,18 @@ public class Stock extends Item
     public Stock() {
     }
 
-    public Stock(String name, String ticker, double price) {
+    public Stock(String name, String ticker, double buyPrice, double price) {
         this.name = name;
         this.ticker = ticker;
+        this.buyPrice = buyPrice;
         this.price = price;
     }
 
-    public Stock(Long id, String name, String ticker, double price) {
+    public Stock(Long id, String name, String ticker, double buyPrice, double price) {
         this.id = id;
         this.name = name;
         this.ticker = ticker;
+        this.buyPrice = buyPrice;
         this.price = price;
     }
 
@@ -30,6 +32,7 @@ public class Stock extends Item
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ticker='" + ticker + '\'' +
+                ", buyPrice=" + buyPrice +
                 ", price=" + price +
                 '}';
     }

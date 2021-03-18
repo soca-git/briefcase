@@ -1,6 +1,5 @@
 package com.example.demo.crypto;
 
-
 import com.example.demo.iexclient.IEXClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class CryptoService
         this.iexClient = new IEXClient();
     }
 
-    public Crypto getOrCreateCrypto(String ticker)
+    public Crypto getOrCreateCrypto(String ticker, double buyPrice)
     {
         Crypto cryptoByTicker = cryptoRepository.findCryptoByTicker(ticker);
         if (cryptoByTicker != null)
@@ -31,15 +30,15 @@ public class CryptoService
         }
         else
         {
-            return createCrypto(ticker);
+            return createCrypto(ticker, buyPrice);
         }
     }
 
-    public Crypto createCrypto(String ticker)
+    public Crypto createCrypto(String ticker, double buyPrice)
     {
         Quote quote = iexClient.getCryptoQuote(ticker);
         double price = quote.getLatestPrice().doubleValue();
-        Crypto crypto = new Crypto(ticker, price);
+        Crypto crypto = new Crypto(ticker, buyPrice, price);
         cryptoRepository.save(crypto);
         return crypto;
     }

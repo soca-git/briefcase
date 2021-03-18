@@ -1,5 +1,6 @@
 package com.example.demo.portfolioitem;
 
+import com.example.demo.item.Item;
 import com.example.demo.portfolio.Portfolio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

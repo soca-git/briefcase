@@ -210,6 +210,7 @@
                                 <thead>
                                     <th scope="col">Name</th>
                                     <th scope="col">Ticker</th>
+                                    <th scope="col">Buy Price</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                 </thead>
@@ -217,6 +218,7 @@
                                     <tr th:each = "pitem: ${pitems}">
                                         <th scope="row" th:text="${pitem.item.name}"></th>
                                         <td th:text="${pitem.item.ticker}"></td>
+                                        <td th:text="'$' + ${pitem.item.buyPrice}"></td>
                                         <td th:text="'$' + ${pitem.item.price}"></td>
                                         <td th:text="${pitem.quantity}"></td>
                                     </tr>

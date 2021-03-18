@@ -67,22 +67,20 @@ public class PortfolioController
             @RequestParam(name="type") String type,
             @RequestParam(value="ticker") String ticker,
             @RequestParam(value="quantity") double quantity,
-            @RequestParam(value="price") double price
+            @RequestParam(value="price") double buyPrice
     )
     {
         Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
-        System.out.println(type);
         if (type.equals("stock"))
         {
-            Stock stock = this.stockService.getOrCreateStock(ticker);
+            Stock stock = this.stockService.getOrCreateStock(ticker, buyPrice);
             this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, quantity);
         }
         else if (type.equals("crypto"))
         {
-            Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker);
+            Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker, buyPrice);
             this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, quantity);
         }
-
         return portfolioView(model, portfolio_name);
     }
 }
