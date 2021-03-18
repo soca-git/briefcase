@@ -75,8 +75,8 @@
                     <input type="text" th:name="quantity" class="form-control" id="quantityInput" placeholder="Enter quantity">
                 </div>
                 <div class="form-group">
-                    <label class="text-info" for="purchasePriceInput">Purchase Price</label>
-                    <input type="text" th:name="price" class="form-control" id="purchasePriceInput" placeholder="Enter price">
+                    <label class="text-info" for="buyPriceInput">Buy Price</label>
+                    <input type="text" th:name="price" class="form-control" id="buyPriceInput" placeholder="Enter price">
                 </div>
                 <button type="submit" class="btn btn-success" value="Submit">Add</button>
                 <button type="reset" class="btn btn-muted" value="Reset">Reset</button>
@@ -114,11 +114,11 @@
                     <div class="row">
                         <!-- Total Holdings -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                 Total Holdings</div>
                                             <div id="total_holdings" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
@@ -130,15 +130,15 @@
                             </div>
                         </div>
 
-                        <!-- Average Holdings -->
+                        <!-- Total Profit/Loss -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Average Holdings</div>
-                                            <div id="average_holdings" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Profit/Loss</div>
+                                            <div id="total_pls" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -168,7 +168,6 @@
                     </div>
 
                     <!-- Content Row -->
-
                     <div class="row">
                         <!-- Positions Bar Chart -->
                         <div class="col-xl-7 col-lg-6">
@@ -178,7 +177,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                        <canvas id="positionsBarChart"></canvas>
                                     </div>
                                     <hr>
                                     Bar chart <code>/js/demo/chart-bar-demo.js</code>
@@ -194,10 +193,29 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
+                                        <canvas id="holdingsPieChart"></canvas>
                                     </div>
                                     <hr>
                                     Donut/Pie chart <code>/js/demo/chart-pie-demo.js</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row-->
+                    <div class="row">
+                        <!-- Profit/Loss Bar Chart -->
+                        <div class="col-xl">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Profit/Loss</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="plsBarChart"></canvas>
+                                    </div>
+                                    <hr>
+                                    Bar chart <code>/js/demo/chart-bar-demo.js</code>
                                 </div>
                             </div>
                         </div>
@@ -277,14 +295,20 @@
 
         // Generate data arrays.
         var pitem_tickers = []
+        var pitem_bprices = []
         var pitem_prices = []
         var pitem_quantities = []
+        var pitem_pls = []
+        var pitem_total_pls = []
         var pitem_holdings = []
         for (i = 0; i < pitems.length; i++)
         {
             pitem_tickers.push(pitems[i].item.ticker)
+            pitem_bprices.push(pitems[i].item.buyPrice)
             pitem_prices.push(pitems[i].item.price)
             pitem_quantities.push(pitems[i].quantity)
+            pitem_pls.push(pitems[i].item.price - pitems[i].item.buyPrice)
+            pitem_total_pls.push((pitems[i].item.price - pitems[i].item.buyPrice) * pitems[i].quantity)
             pitem_holdings.push(pitems[i].item.price * pitems[i].quantity)
         }
     </script>
@@ -307,8 +331,8 @@
     <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
-    <script th:src="@{/js/demo/chart-bar-demo.js}"></script>
+    <script th:src="@{/js/charts/chart-pie.js}"></script>
+    <script th:src="@{/js/charts/chart-bar.js}"></script>
 
 </body>
 

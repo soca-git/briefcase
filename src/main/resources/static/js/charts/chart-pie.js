@@ -2,9 +2,9 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-// Pie Chart Example
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
+// Holdings Pie Chart
+var ctx = document.getElementById("holdingsPieChart");
+var holdingsPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
     labels: pitem_tickers,

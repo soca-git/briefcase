@@ -3,7 +3,7 @@
 var total_holdings = sum(pitem_holdings);
 
 // Average Holdings
-var average_holdings = average(pitem_holdings);
+var total_pls = sum(pitem_total_pls);
 
 // Largest Position Percentage
 var largest_position = Math.max(...pitem_holdings);

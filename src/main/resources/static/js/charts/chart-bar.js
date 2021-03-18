@@ -27,9 +27,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-// Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
+// Positions Bar Chart
+var ctx = document.getElementById("positionsBarChart");
+var positionsBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
     labels: pitem_tickers,
@@ -61,7 +61,7 @@ var myBarChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 6
+          maxTicksLimit: 100
         },
         maxBarThickness: 25,
       }],
@@ -69,7 +69,112 @@ var myBarChart = new Chart(ctx, {
         ticks: {
           min: 0,
           max: Math.max(...pitem_holdings),
-          maxTicksLimit: 10,
+          maxTicksLimit: 5,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            return '$' + number_format(value);
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+        }
+      }
+    },
+  }
+});
+
+
+
+// Profit/Loss Bar Chart
+var datasets = [
+    {
+         label: "Value",
+         data: pitem_total_pls,
+         backgroundColor: [],
+         hoverBackgroundColor: [],
+         borderColor: [],
+    }
+];
+
+for (i = 0; i < pitem_total_pls.length; i++)
+{
+    if (pitem_total_pls[i] > 0)
+    {
+        datasets[0].backgroundColor.push("aquamarine");
+        datasets[0].hoverBackgroundColor.push("aquamarine");
+        datasets[0].borderColor.push("aquamarine");
+    }
+    else
+    {
+        datasets[0].backgroundColor.push("firebrick");
+        datasets[0].hoverBackgroundColor.push("firebrick");
+        datasets[0].borderColor.push("firebrick");
+    }
+}
+
+var ctx = document.getElementById("plsBarChart");
+var plsBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: pitem_tickers,
+    datasets: datasets,
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'stock'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          maxTicksLimit: 100
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: Math.min(...pitem_total_pls),
+          max: Math.max(...pitem_total_pls),
+          maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
