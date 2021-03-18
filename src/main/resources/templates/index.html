@@ -53,17 +53,30 @@
             <!-- Divider -->
             <hr class="mt-4 mb-4 sidebar-divider">
 
-            <!-- Add Stock Form -->
-            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio/add-stock?name=}+${portfolio_name}" method="post">
+            <!-- Add to Portfolio Form -->
+            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio/add-item?name=}+${portfolio_name}" method="post">
                 <!-- Heading -->
-                <h6 class="text-white">Add a Stock:</h6>
+                <h6 class="text-white">Add to Portfolio:</h6>
                 <div class="form-group">
-                    <label class="text-info" for="stockTickerInput">Ticker</label>
-                    <input type="text" th:name="ticker" class="form-control" id="stockTickerInput" placeholder="Enter stock ticker">
+                    <label class="text-info" for="typeSelect">Type</label>
+                    <div>
+                        <select id="typeSelect" th:name="type">
+                            <option value="stock">stock</option>
+                            <option value="crypto">crypto</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label class="text-info" for="stockQuantityInput">Quantity</label>
-                    <input type="text" th:name="quantity" class="form-control" id="stockQuantityInput" placeholder="Enter stock quantity">
+                    <label class="text-info" for="tickerInput">Ticker</label>
+                    <input type="text" th:name="ticker" class="form-control" id="tickerInput" placeholder="Enter ticker">
+                </div>
+                <div class="form-group">
+                    <label class="text-info" for="quantityInput">Quantity</label>
+                    <input type="text" th:name="quantity" class="form-control" id="quantityInput" placeholder="Enter quantity">
+                </div>
+                <div class="form-group">
+                    <label class="text-info" for="purchasePriceInput">Purchase Price</label>
+                    <input type="text" th:name="price" class="form-control" id="purchasePriceInput" placeholder="Enter price">
                 </div>
                 <button type="submit" class="btn btn-success" value="Submit">Add</button>
                 <button type="reset" class="btn btn-muted" value="Reset">Reset</button>
@@ -72,24 +85,6 @@
             <!-- Divider -->
             <hr class="mt-4 mb-4 sidebar-divider">
 
-            <!-- Add Crypto Form -->
-            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio/add-crypto?name=}+${portfolio_name}" method="post">
-                <!-- Heading -->
-                <h6 class="text-white">Add a Cryptocurrency:</h6>
-                <div class="form-group">
-                    <label class="text-info" for="cryptoTickerInput">Ticker</label>
-                    <input type="text" th:name="ticker" class="form-control" id="cryptoTickerInput" placeholder="Enter crypto ticker">
-                </div>
-                <div class="form-group">
-                    <label class="text-info" for="cryptoQuantityInput">Quantity</label>
-                    <input type="text" th:name="quantity" class="form-control" id="cryptoQuantityInput" placeholder="Enter crypto quantity">
-                </div>
-                <button type="submit" class="btn btn-success" value="Submit">Add</button>
-                <button type="reset" class="btn btn-muted" value="Reset">Reset</button>
-            </form>
-
-            <!-- Divider -->
-            <hr class="mt-4 mb-4 sidebar-divider">
         </ul>
         <!-- End of Sidebar -->
 

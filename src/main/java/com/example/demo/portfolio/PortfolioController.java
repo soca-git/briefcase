@@ -59,33 +59,30 @@ public class PortfolioController
         return "redirect:/api/v1/portfolio";
     }
 
-    // Add stock form.
-    @PostMapping("/add-stock")
+    // Add to portfolio form.
+    @PostMapping("/add-item")
     public String addStock(
             Model model,
             @RequestParam(name="name") String portfolio_name,
+            @RequestParam(name="type") String type,
             @RequestParam(value="ticker") String ticker,
-            @RequestParam(value="quantity") double quantity
+            @RequestParam(value="quantity") double quantity,
+            @RequestParam(value="price") double price
     )
     {
         Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
-        Stock stock = this.stockService.getOrCreateStock(ticker);
-        this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, quantity);
-        return portfolioView(model, portfolio_name);
-    }
+        System.out.println(type);
+        if (type.equals("stock"))
+        {
+            Stock stock = this.stockService.getOrCreateStock(ticker);
+            this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, quantity);
+        }
+        else if (type.equals("crypto"))
+        {
+            Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker);
+            this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, quantity);
+        }
 
-    // Add crypto form.
-    @PostMapping("/add-crypto")
-    public String addCrypto(
-            Model model,
-            @RequestParam(name="name") String portfolio_name,
-            @RequestParam(value="ticker") String ticker,
-            @RequestParam(value="quantity") double quantity
-    )
-    {
-        Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
-        Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker);
-        this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, quantity);
         return portfolioView(model, portfolio_name);
     }
 }
