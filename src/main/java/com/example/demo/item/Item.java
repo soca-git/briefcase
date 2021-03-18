@@ -27,27 +27,22 @@ public class Item
     @Column(name="ticker")
     protected String ticker;
 
-    @Column(name="buyPrice")
-    protected double buyPrice;
-
     @Column(name="price")
     protected double price;
 
     public Item() {
     }
 
-    public Item(String name, String ticker, double buyPrice, double price) {
+    public Item(String name, String ticker, double price) {
         this.name = name;
         this.ticker = ticker;
-        this.buyPrice = buyPrice;
         this.price = price;
     }
 
-    public Item(Long id, String name, String ticker, double buyPrice, double price) {
+    public Item(Long id, String name, String ticker, double price) {
         this.id = id;
         this.name = name;
         this.ticker = ticker;
-        this.buyPrice = buyPrice;
         this.price = price;
     }
 
@@ -61,10 +56,6 @@ public class Item
 
     public String getTicker() {
         return ticker;
-    }
-
-    public double getBuyPrice() {
-        return buyPrice;
     }
 
     public double getPrice() {
@@ -81,10 +72,6 @@ public class Item
 
     public void setTicker(String ticker) {
         this.ticker = ticker;
-    }
-
-    public void setBuyPrice(double buyPrice) {
-        this.buyPrice = buyPrice;
     }
 
     public void setPrice(double price) {

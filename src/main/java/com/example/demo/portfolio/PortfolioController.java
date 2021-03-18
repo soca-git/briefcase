@@ -73,13 +73,13 @@ public class PortfolioController
         Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
         if (type.equals("stock"))
         {
-            Stock stock = this.stockService.getOrCreateStock(ticker, buyPrice);
-            this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, quantity);
+            Stock stock = this.stockService.getOrCreateStock(ticker);
+            this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, buyPrice, quantity);
         }
         else if (type.equals("crypto"))
         {
-            Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker, buyPrice);
-            this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, quantity);
+            Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker);
+            this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, buyPrice, quantity);
         }
         return portfolioView(model, portfolio_name);
     }

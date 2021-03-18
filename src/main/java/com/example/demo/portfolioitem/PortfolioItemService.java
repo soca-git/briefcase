@@ -18,7 +18,7 @@ public class PortfolioItemService
         this.portfolioItemRepository = portfolioItemRepository;
     }
 
-    public PortfolioItem getOrCreatePortfolioStock(Portfolio portfolio, Stock stock, double quantity)
+    public PortfolioItem getOrCreatePortfolioStock(Portfolio portfolio, Stock stock, double buyPrice, double quantity)
     {
         PortfolioItem portfolioItemByOwnerAndStock = portfolioItemRepository.findPortfolioItemByOwnerANDItem(
                 portfolio, stock
@@ -36,11 +36,11 @@ public class PortfolioItemService
         }
         else
         {
-            return createPortfolioStock(portfolio, stock, quantity);
+            return createPortfolioStock(portfolio, stock, buyPrice, quantity);
         }
     }
 
-    public PortfolioItem getOrCreatePortfolioCrypto(Portfolio portfolio, Crypto crypto, double quantity)
+    public PortfolioItem getOrCreatePortfolioCrypto(Portfolio portfolio, Crypto crypto, double buyPrice, double quantity)
     {
         PortfolioItem portfolioItemByOwnerAndCrypto = portfolioItemRepository.findPortfolioItemByOwnerANDItem(
                 portfolio, crypto
@@ -58,20 +58,20 @@ public class PortfolioItemService
         }
         else
         {
-            return createPortfolioCrypto(portfolio, crypto, quantity);
+            return createPortfolioCrypto(portfolio, crypto, buyPrice, quantity);
         }
     }
 
-    public PortfolioItem createPortfolioStock(Portfolio portfolio, Stock stock, double quantity)
+    public PortfolioItem createPortfolioStock(Portfolio portfolio, Stock stock, double buyPrice, double quantity)
     {
-        PortfolioItem portfolioItem = new PortfolioItem(portfolio, stock, quantity);
+        PortfolioItem portfolioItem = new PortfolioItem(portfolio, stock, buyPrice, quantity);
         this.portfolioItemRepository.save(portfolioItem);
         return portfolioItem;
     }
 
-    public PortfolioItem createPortfolioCrypto(Portfolio portfolio, Crypto crypto, double quantity)
+    public PortfolioItem createPortfolioCrypto(Portfolio portfolio, Crypto crypto, double buyPrice, double quantity)
     {
-        PortfolioItem portfolioItem = new PortfolioItem(portfolio, crypto, quantity);
+        PortfolioItem portfolioItem = new PortfolioItem(portfolio, crypto, buyPrice, quantity);
         this.portfolioItemRepository.save(portfolioItem);
         return portfolioItem;
     }

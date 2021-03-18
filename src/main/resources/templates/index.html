@@ -236,7 +236,7 @@
                                     <tr th:each = "pitem: ${pitems}">
                                         <th scope="row" th:text="${pitem.item.name}"></th>
                                         <td th:text="${pitem.item.ticker}"></td>
-                                        <td th:text="'$' + ${pitem.item.buyPrice}"></td>
+                                        <td th:text="'$' + ${pitem.buyPrice}"></td>
                                         <td th:text="'$' + ${pitem.item.price}"></td>
                                         <td th:text="${pitem.quantity}"></td>
                                     </tr>
@@ -304,11 +304,11 @@
         for (i = 0; i < pitems.length; i++)
         {
             pitem_tickers.push(pitems[i].item.ticker)
-            pitem_bprices.push(pitems[i].item.buyPrice)
+            pitem_bprices.push(pitems[i].buyPrice)
             pitem_prices.push(pitems[i].item.price)
             pitem_quantities.push(pitems[i].quantity)
-            pitem_pls.push(pitems[i].item.price - pitems[i].item.buyPrice)
-            pitem_total_pls.push((pitems[i].item.price - pitems[i].item.buyPrice) * pitems[i].quantity)
+            pitem_pls.push(pitems[i].item.price - pitems[i].buyPrice)
+            pitem_total_pls.push((pitems[i].item.price - pitems[i].buyPrice) * pitems[i].quantity)
             pitem_holdings.push(pitems[i].item.price * pitems[i].quantity)
         }
     </script>

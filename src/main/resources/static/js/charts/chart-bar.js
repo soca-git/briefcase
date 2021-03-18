@@ -143,6 +143,12 @@ if (Math.min(...pitem_total_pls) < 0)
     min_pls = Math.min(...pitem_total_pls);
 }
 
+var max_pls = 0;
+if (Math.max(...pitem_total_pls) > 0)
+{
+    max_pls = Math.max(...pitem_total_pls);
+}
+
 var ctx = document.getElementById("plsBarChart");
 var plsBarChart = new Chart(ctx, {
   type: 'bar',
@@ -177,6 +183,7 @@ var plsBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: min_pls,
+          max: max_pls,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {

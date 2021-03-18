@@ -32,35 +32,27 @@ public class PortfolioItem
     @JoinColumn(name="item")
     private Item item;
 
+    @Column(name="buyPrice")
+    private double buyPrice;
+
     @Column(name="quantity")
     private double quantity;
 
     public PortfolioItem() {
     }
 
-    public PortfolioItem(Portfolio owner, Stock stock, double quantity) {
+    public PortfolioItem(Portfolio owner, Item item, double buyPrice, double quantity) {
         this.owner = owner;
-        this.item = stock;
+        this.item = item;
+        this.buyPrice = buyPrice;
         this.quantity = quantity;
     }
 
-    public PortfolioItem(Portfolio owner, Crypto crypto, double quantity) {
-        this.owner = owner;
-        this.item = crypto;
-        this.quantity = quantity;
-    }
-
-    public PortfolioItem(Long id, Portfolio owner, Stock stock, double quantity) {
+    public PortfolioItem(Long id, Portfolio owner, Item item, double buyPrice, double quantity) {
         this.id = id;
         this.owner = owner;
-        this.item = stock;
-        this.quantity = quantity;
-    }
-
-    public PortfolioItem(Long id, Portfolio owner, Crypto crypto, double quantity) {
-        this.id = id;
-        this.owner = owner;
-        this.item = crypto;
+        this.item = item;
+        this.buyPrice = buyPrice;
         this.quantity = quantity;
     }
 
@@ -76,6 +68,10 @@ public class PortfolioItem
         return item;
     }
 
+    public double getBuyPrice() {
+        return buyPrice;
+    }
+
     public double getQuantity() {
         return quantity;
     }
@@ -88,12 +84,12 @@ public class PortfolioItem
         this.owner = owner;
     }
 
-    public void setItem(Stock stock) {
-        this.item = stock;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public void setItem(Crypto crypto) {
-        this.item = crypto;
+    public void setBuyPrice(double buyPrice) {
+        this.buyPrice = buyPrice;
     }
 
     public void setQuantity(double quantity) {
@@ -106,6 +102,7 @@ public class PortfolioItem
                 "id=" + id +
                 ", owner=" + owner +
                 ", item=" + item +
+                ", buyPrice=" + buyPrice +
                 ", quantity=" + quantity +
                 '}';
     }

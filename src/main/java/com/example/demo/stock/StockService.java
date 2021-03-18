@@ -24,7 +24,7 @@ public class StockService
         this.iexClient = new IEXClient();
     }
 
-    public Stock getOrCreateStock(String ticker, double buyPrice)
+    public Stock getOrCreateStock(String ticker)
     {
         Stock stockByTicker = stockRepository.findStockByTicker(ticker);
         if (stockByTicker != null)
@@ -34,16 +34,16 @@ public class StockService
         }
         else
         {
-            return createStock(ticker, buyPrice);
+            return createStock(ticker);
         }
     }
 
-    public Stock createStock(String ticker, double buyPrice)
+    public Stock createStock(String ticker)
     {
         Quote quote = iexClient.getStockQuote(ticker);
         double price = quote.getLatestPrice().doubleValue();
         String name = quote.getCompanyName();
-        Stock stock = new Stock(name, ticker, buyPrice, price);
+        Stock stock = new Stock(name, ticker, price);
         stockRepository.save(stock);
         return stock;
     }

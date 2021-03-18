@@ -20,7 +20,7 @@ public class CryptoService
         this.iexClient = new IEXClient();
     }
 
-    public Crypto getOrCreateCrypto(String ticker, double buyPrice)
+    public Crypto getOrCreateCrypto(String ticker)
     {
         Crypto cryptoByTicker = cryptoRepository.findCryptoByTicker(ticker);
         if (cryptoByTicker != null)
@@ -30,15 +30,15 @@ public class CryptoService
         }
         else
         {
-            return createCrypto(ticker, buyPrice);
+            return createCrypto(ticker);
         }
     }
 
-    public Crypto createCrypto(String ticker, double buyPrice)
+    public Crypto createCrypto(String ticker)
     {
         Quote quote = iexClient.getCryptoQuote(ticker);
         double price = quote.getLatestPrice().doubleValue();
-        Crypto crypto = new Crypto(ticker, buyPrice, price);
+        Crypto crypto = new Crypto(ticker, price);
         cryptoRepository.save(crypto);
         return crypto;
     }

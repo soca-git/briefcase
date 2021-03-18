@@ -11,18 +11,16 @@ public class Stock extends Item
     public Stock() {
     }
 
-    public Stock(String name, String ticker, double buyPrice, double price) {
+    public Stock(String name, String ticker, double price) {
         this.name = name;
         this.ticker = ticker;
-        this.buyPrice = buyPrice;
         this.price = price;
     }
 
-    public Stock(Long id, String name, String ticker, double buyPrice, double price) {
+    public Stock(Long id, String name, String ticker, double price) {
         this.id = id;
         this.name = name;
         this.ticker = ticker;
-        this.buyPrice = buyPrice;
         this.price = price;
     }
 
@@ -32,7 +30,6 @@ public class Stock extends Item
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ticker='" + ticker + '\'' +
-                ", buyPrice=" + buyPrice +
                 ", price=" + price +
                 '}';
     }
