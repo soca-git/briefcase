@@ -24,8 +24,11 @@
 - [x] Initial metrics.
 - [x] Initial charts.
 - [x] Portfolio items table.
-- [ ] Add ability to supply purchase price of item.
-- [ ] Add profit/loss related metrics.
+- [x] Add ability to supply purchase price of item.
+- [x] Add profit/loss related metrics.
+- [ ] Add available ticker symbol index/search.
+- [ ] Add ability to update/refresh market prices.
+- [ ] Add ability to remove items from portfolio.
 
 
 ## Project Milestones
