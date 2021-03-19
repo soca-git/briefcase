@@ -1,4 +1,8 @@
 
-.stock-form input {
+.sidebar-form input {
     font-size: small;
+}
+
+.item-table {
+    overflow-x: auto;
 }

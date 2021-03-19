@@ -27,10 +27,10 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Logo -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-briefcase"></i>
                 </div>
@@ -40,7 +40,7 @@
             <hr class="mb-4 sidebar-divider">
 
             <!-- Select/Create Portfolio -->
-            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio}" method="post">
+            <form class="ml-3 mr-3 sidebar-form" action="#" th:action="@{/api/v1/portfolio}" method="post">
                 <!-- Heading -->
                 <h6 class="text-white">Select/Create Portfolio:</h6>
                 <div class="form-group">
@@ -54,11 +54,11 @@
             <hr class="mt-4 mb-4 sidebar-divider">
 
             <!-- Add to Portfolio Form -->
-            <form class="ml-3 mr-3 stock-form" action="#" th:action="@{/api/v1/portfolio/add-item?name=}+${portfolio_name}" method="post">
+            <form class="ml-3 mr-3 sidebar-form" action="#" th:action="@{/api/v1/portfolio/add-item?name=}+${portfolio_name}" method="post">
                 <!-- Heading -->
                 <h6 class="text-white">Add to Portfolio:</h6>
                 <div class="form-group">
-                    <label class="text-info" for="typeSelect">Type</label>
+                    <label class="text-warning" for="typeSelect">Type</label>
                     <div>
                         <select id="typeSelect" th:name="type">
                             <option value="stock">stock</option>
@@ -67,19 +67,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="text-info" for="tickerInput">Ticker</label>
+                    <label class="text-warning" for="tickerInput">Ticker</label>
                     <input type="text" th:name="ticker" class="form-control" id="tickerInput" placeholder="Enter ticker">
                 </div>
                 <div class="form-group">
-                    <label class="text-info" for="quantityInput">Quantity</label>
+                    <label class="text-warning" for="quantityInput">Quantity</label>
                     <input type="text" th:name="quantity" class="form-control" id="quantityInput" placeholder="Enter quantity">
                 </div>
                 <div class="form-group">
-                    <label class="text-info" for="buyPriceInput">Buy Price</label>
+                    <label class="text-warning" for="buyPriceInput">Buy Price</label>
                     <input type="text" th:name="price" class="form-control" id="buyPriceInput" placeholder="Enter price">
                 </div>
                 <button type="submit" class="btn btn-success" value="Submit">Add</button>
-                <button type="reset" class="btn btn-muted" value="Reset">Reset</button>
+                <button type="reset" class="btn btn-secondary" value="Reset">Reset</button>
             </form>
 
             <!-- Divider -->
@@ -95,15 +95,15 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="bg-white topbar mb-4 static-top shadow d-sm-flex align-items-center justify-content-flex-start">
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav">
-                        <!-- Page Heading -->
-                        <div class="nav-item ml-4 d-sm-flex align-items-center justify-content-flex-start">
-                            <i class="mb-1 fas fa-chart-pie"></i>
-                            <h1 class="h3 mb-0 ml-2 text-gray-800">Portfolio [<span th:text="${portfolio_name}"></span>]</h1>
-                        </div>
-                    </ul>
+                <nav class="bg-white topbar mb-4 static-top shadow d-sm-flex flex-wrap align-items-center justify-content-between">
+                    <!-- Page Heading -->
+                    <div class="nav-item d-sm-flex align-items-center justify-content-flex-start">
+                        <h1 class="h3 m-2 text-gray-800">
+                            <i class="mr-2 fas fa-chart-pie"></i>Portfolio
+                        </h1>
+                    </div>
+                    <!-- Current Portfolio-->
+                    <h1 class="h3 m-2 pb-1 text-gray-800">[<span th:text="${portfolio_name}"></span>]</h1>
                 </nav>
                 <!-- End of Topbar -->
 
@@ -180,7 +180,7 @@
                                         <canvas id="positionsBarChart"></canvas>
                                     </div>
                                     <hr>
-                                    Bar chart <code>/js/demo/chart-bar-demo.js</code>
+                                    Bar chart <code>/js/demo/chart-bar.js</code>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                                         <canvas id="holdingsPieChart"></canvas>
                                     </div>
                                     <hr>
-                                    Donut/Pie chart <code>/js/demo/chart-pie-demo.js</code>
+                                    Donut/Pie chart <code>/js/demo/chart-pie.js</code>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                                         <canvas id="plsBarChart"></canvas>
                                     </div>
                                     <hr>
-                                    Bar chart <code>/js/demo/chart-bar-demo.js</code>
+                                    Bar chart <code>/js/demo/chart-bar.js</code>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +223,7 @@
 
                     <!-- Content Row-->
                     <div class="row">
-                        <div class="col-xl">
+                        <div class="item-table col-xl">
                             <table class="table table-light rounded shadow">
                                 <thead>
                                     <th scope="col">Name</th>
