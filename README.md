@@ -29,7 +29,7 @@
 - [x] Add profit/loss related metrics.
 - [ ] Add available ticker symbol index/search.
 - [ ] Add ability to update/refresh market prices.
-- [ ] Add ability to remove items from portfolio.
+- [x] Add ability to remove items from portfolio.
 
 
 ## Project Milestones
