@@ -1,9 +1,8 @@
 package com.example.demo.portfolio;
 
-import com.example.demo.crypto.Crypto;
 import com.example.demo.crypto.CryptoService;
+import com.example.demo.item.Item;
 import com.example.demo.portfolioitem.PortfolioItemService;
-import com.example.demo.stock.Stock;
 import com.example.demo.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,7 @@ public class PortfolioController
     {
         if (portfolio_name != null)
         {
-            Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
+            Portfolio portfolio = portfolioService.getOrCreatePortfolio(portfolio_name);
             model.addAttribute("portfolio_name", portfolio_name);
             model.addAttribute("pitems", portfolioItemService.getPortfolioItems(portfolio));
         }
@@ -61,7 +60,7 @@ public class PortfolioController
 
     // Add to portfolio form.
     @PostMapping("/add-item")
-    public String addStock(
+    public String addItem(
             Model model,
             @RequestParam(name="name") String portfolio_name,
             @RequestParam(name="type") String type,
@@ -70,17 +69,29 @@ public class PortfolioController
             @RequestParam(value="price") double buyPrice
     )
     {
-        Portfolio portfolio = this.portfolioService.getOrCreatePortfolio(portfolio_name);
+        Portfolio portfolio = portfolioService.getOrCreatePortfolio(portfolio_name);
+        Item item = null;
         if (type.equals("stock"))
         {
-            Stock stock = this.stockService.getOrCreateStock(ticker);
-            this.portfolioItemService.getOrCreatePortfolioStock(portfolio, stock, buyPrice, quantity);
+            item = stockService.getOrCreateStock(ticker);
         }
         else if (type.equals("crypto"))
         {
-            Crypto crypto = this.cryptoService.getOrCreateCrypto(ticker);
-            this.portfolioItemService.getOrCreatePortfolioCrypto(portfolio, crypto, buyPrice, quantity);
+            item = cryptoService.getOrCreateCrypto(ticker);
         }
+        portfolioItemService.getOrCreatePortfolioItem(portfolio, item, buyPrice, quantity);
+        return portfolioView(model, portfolio_name);
+    }
+
+    // Delete Portfolio Item form/button.
+    @PostMapping("/delete-item")
+    public String deleteItem(
+            Model model,
+            @RequestParam(name="name") String portfolio_name,
+            @RequestParam(value="id") Long id
+    )
+    {
+        portfolioItemService.deletePortfolioItem(id);
         return portfolioView(model, portfolio_name);
     }
 }

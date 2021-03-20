@@ -17,6 +17,7 @@ public class IEXClient
 
     public IEXClient()
     {
+        // move to environment vars!
         this.publicKey = "pk_d7996497b8844a999541274497663935";
         this.secretKey = "sk_5b4f8a0d878245189977ce9a2d366c50";
         token = new IEXCloudTokenBuilder().withPublishableToken(publicKey).build();

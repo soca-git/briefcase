@@ -47,7 +47,7 @@
                     <!--<label class="text-info" for="portfolioInput">Portfolio</label>-->
                     <input type="text" th:name="name" class="form-control" id="portfolioInput" placeholder="Enter portfolio name">
                 </div>
-                <button type="submit" class="btn btn-success" value="Submit">Submit</button>
+                <button type="submit" class="mb-2 btn btn-success" value="Submit">Submit</button>
             </form>
 
             <!-- Divider -->
@@ -78,8 +78,8 @@
                     <label class="text-warning" for="buyPriceInput">Buy Price</label>
                     <input type="text" th:name="price" class="form-control" id="buyPriceInput" placeholder="Enter price">
                 </div>
-                <button type="submit" class="btn btn-success" value="Submit">Add</button>
-                <button type="reset" class="btn btn-secondary" value="Reset">Reset</button>
+                <button type="submit" class="mb-2 btn btn-success" value="Submit">Add</button>
+                <button type="reset" class="mb-2 btn btn-secondary" value="Reset">Reset</button>
             </form>
 
             <!-- Divider -->
@@ -231,6 +231,7 @@
                                     <th scope="col">Buy Price</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
+                                    <th scope="col"></th>
                                 </thead>
                                 <tbody>
                                     <tr th:each = "pitem: ${pitems}">
@@ -239,6 +240,12 @@
                                         <td th:text="'$' + ${pitem.buyPrice}"></td>
                                         <td th:text="'$' + ${pitem.item.price}"></td>
                                         <td th:text="${pitem.quantity}"></td>
+                                        <td>
+                                            <form action="#" th:action="@{/api/v1/portfolio/delete-item?name=}+${portfolio_name}" method="post">
+                                                <input type="hidden" th:name="id" th:value="${pitem.id}">
+                                                <button type="submit" class="btn-xsm btn-danger" value="Delete">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

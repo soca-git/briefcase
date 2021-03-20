@@ -1,8 +1,7 @@
 package com.example.demo.portfolioitem;
 
-import com.example.demo.crypto.Crypto;
+import com.example.demo.item.Item;
 import com.example.demo.portfolio.Portfolio;
-import com.example.demo.stock.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,66 +17,46 @@ public class PortfolioItemService
         this.portfolioItemRepository = portfolioItemRepository;
     }
 
-    public PortfolioItem getOrCreatePortfolioStock(Portfolio portfolio, Stock stock, double buyPrice, double quantity)
+    public PortfolioItem getOrCreatePortfolioItem(Portfolio portfolio, Item item, double buyPrice, double quantity)
     {
-        PortfolioItem portfolioItemByOwnerAndStock = portfolioItemRepository.findPortfolioItemByOwnerANDItem(
-                portfolio, stock
+        PortfolioItem portfolioItemByOwnerAndItem = portfolioItemRepository.findPortfolioItemByOwnerANDItem(
+                portfolio, item
         );
-        if (portfolioItemByOwnerAndStock != null)
+        if (portfolioItemByOwnerAndItem != null)
         {
             System.out.println(
                     String.format(
                             "The %s stock already exists for owner %s!",
-                            portfolioItemByOwnerAndStock.getItem().getTicker(),
-                            portfolioItemByOwnerAndStock.getOwner().getName()
+                            portfolioItemByOwnerAndItem.getItem().getTicker(),
+                            portfolioItemByOwnerAndItem.getOwner().getName()
                     )
             );
-            return portfolioItemByOwnerAndStock;
+            return portfolioItemByOwnerAndItem;
         }
         else
         {
-            return createPortfolioStock(portfolio, stock, buyPrice, quantity);
+            return createPortfolioItem(portfolio, item, buyPrice, quantity);
         }
     }
 
-    public PortfolioItem getOrCreatePortfolioCrypto(Portfolio portfolio, Crypto crypto, double buyPrice, double quantity)
+    public PortfolioItem createPortfolioItem(Portfolio portfolio, Item item, double buyPrice, double quantity)
     {
-        PortfolioItem portfolioItemByOwnerAndCrypto = portfolioItemRepository.findPortfolioItemByOwnerANDItem(
-                portfolio, crypto
-        );
-        if (portfolioItemByOwnerAndCrypto != null)
-        {
-            System.out.println(
-                    String.format(
-                            "The %s stock already exists for owner %s!",
-                            portfolioItemByOwnerAndCrypto.getItem().getTicker(),
-                            portfolioItemByOwnerAndCrypto.getOwner().getName()
-                    )
-            );
-            return portfolioItemByOwnerAndCrypto;
-        }
-        else
-        {
-            return createPortfolioCrypto(portfolio, crypto, buyPrice, quantity);
-        }
-    }
-
-    public PortfolioItem createPortfolioStock(Portfolio portfolio, Stock stock, double buyPrice, double quantity)
-    {
-        PortfolioItem portfolioItem = new PortfolioItem(portfolio, stock, buyPrice, quantity);
-        this.portfolioItemRepository.save(portfolioItem);
-        return portfolioItem;
-    }
-
-    public PortfolioItem createPortfolioCrypto(Portfolio portfolio, Crypto crypto, double buyPrice, double quantity)
-    {
-        PortfolioItem portfolioItem = new PortfolioItem(portfolio, crypto, buyPrice, quantity);
-        this.portfolioItemRepository.save(portfolioItem);
+        PortfolioItem portfolioItem = new PortfolioItem(portfolio, item, buyPrice, quantity);
+        portfolioItemRepository.save(portfolioItem);
         return portfolioItem;
     }
 
     public List<PortfolioItem> getPortfolioItems(Portfolio portfolio)
     {
         return portfolioItemRepository.findPortfolioItemsByOwner(portfolio);
+    }
+
+    public void deletePortfolioItem(Long id)
+    {
+        boolean exists = portfolioItemRepository.existsById(id);
+        if (exists)
+        {
+            portfolioItemRepository.deleteById(id);
+        }
     }
 }
