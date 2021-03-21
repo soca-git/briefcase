@@ -7,11 +7,14 @@ on:
     branches: [ master ]
 
 jobs:
+  # Build
   build:
     runs-on: ubuntu-latest
+
     # Services
     services:
       # Setup Postgres database
+      # (Docker Container)
       postgres:
         image: postgres:13.2
         env:
@@ -25,6 +28,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     # Steps
     steps:
       # Check out repository
@@ -35,6 +39,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 15
+
+  # Test
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # Steps
+    steps:
       # Run tests
       - name: Test with Maven
         run: mvn -B test --file pom.xml
