@@ -64,6 +64,8 @@ jobs:
         uses: actions/checkout@v2
 
       # Add remote heroku
+      - name: Login to Heroku
+        run: docker login --username=${{secrets.HEROKU_EMAIL}} --password=${{secrets.HEROKU_API_KEY}} registry.heroku.com
       - name: Add remote heroku
         run: git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}.git
       - name: Deploy to Heroku
