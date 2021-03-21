@@ -15,9 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PortfolioController
 {
     private final PortfolioService portfolioService;
-    private final PortfolioItemService portfolioItemService;
-    private final StockService stockService;
-    private final CryptoService cryptoService;
 
     // Autowired is used for dependency injection.
     // StudentService is instantiated for injection in the
@@ -32,9 +29,6 @@ public class PortfolioController
     )
     {
         this.portfolioService = portfolioService;
-        this.portfolioItemService = portfolioItemService;
-        this.stockService = stockService;
-        this.cryptoService = cryptoService;
     }
 
     // Portfolio view.
@@ -45,7 +39,7 @@ public class PortfolioController
         {
             Portfolio portfolio = portfolioService.getOrCreatePortfolio(portfolio_name);
             model.addAttribute("portfolio_name", portfolio_name);
-            model.addAttribute("pitems", portfolioItemService.getPortfolioItems(portfolio));
+            model.addAttribute("pitems", portfolioService.getPortfolioItems(portfolio));
         }
         return "index";
     }
@@ -70,16 +64,7 @@ public class PortfolioController
     )
     {
         Portfolio portfolio = portfolioService.getOrCreatePortfolio(portfolio_name);
-        Item item = null;
-        if (type.equals("stock"))
-        {
-            item = stockService.getOrCreateStock(ticker);
-        }
-        else if (type.equals("crypto"))
-        {
-            item = cryptoService.getOrCreateCrypto(ticker);
-        }
-        portfolioItemService.getOrCreatePortfolioItem(portfolio, item, buyPrice, quantity);
+        portfolioService.addItem(portfolio, type, ticker, quantity, buyPrice);
         return portfolioView(model, portfolio_name);
     }
 
@@ -91,7 +76,7 @@ public class PortfolioController
             @RequestParam(value="id") Long id
     )
     {
-        portfolioItemService.deletePortfolioItem(id);
+        portfolioService.deleteItem(id);
         return portfolioView(model, portfolio_name);
     }
 
