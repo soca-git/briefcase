@@ -54,17 +54,11 @@ jobs:
 
   # Deploy
   deploy:
-    #needs: build-test
+    needs: build-test
     runs-on: ubuntu-latest
     
     # Steps
     steps:
-    #
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-    #
+    # Heroku is connected to master & will deploy automatically
     - name: Deploy to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      run: echo "fix later"
+      run: echo "Deploying..."
