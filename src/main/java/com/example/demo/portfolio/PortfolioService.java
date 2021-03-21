@@ -1,9 +1,11 @@
 package com.example.demo.portfolio;
 
+import com.example.demo.crypto.Crypto;
 import com.example.demo.crypto.CryptoService;
 import com.example.demo.item.Item;
 import com.example.demo.portfolioitem.PortfolioItem;
 import com.example.demo.portfolioitem.PortfolioItemService;
+import com.example.demo.stock.Stock;
 import com.example.demo.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,13 +73,13 @@ public class PortfolioService
         for (PortfolioItem pItem : portfolioItemService.getPortfolioItems(portfolio))
         {
             String itemClass = pItem.getItem().getClass().getSimpleName();
-            if ("Stock".equals(itemClass))
+            if (itemClass.equals("Stock"))
             {
-                stockService.updatePrice(pItem.getItem());
+                stockService.updatePrice((Stock) pItem.getItem());
             }
-            else if ("Crypto".equals(itemClass))
+            else if (itemClass.equals("Crypto"))
             {
-                cryptoService.updatePrice(pItem.getItem());
+                cryptoService.updatePrice((Crypto) pItem.getItem());
             }
         }
     }

@@ -1,7 +1,9 @@
 package com.example.demo.portfolioitem;
 
+import com.example.demo.crypto.Crypto;
 import com.example.demo.item.Item;
 import com.example.demo.portfolio.Portfolio;
+import com.example.demo.stock.Stock;
 
 import javax.persistence.*;
 

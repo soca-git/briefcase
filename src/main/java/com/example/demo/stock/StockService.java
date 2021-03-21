@@ -52,6 +52,7 @@ public class StockService extends ItemService
     public void updatePrice(Stock stock)
     {
         Quote quote = iexClient.getStockQuote(stock.getTicker());
+        System.out.println(quote.getLatestPrice());
         stock.setPrice(quote.getLatestPrice().doubleValue());
         stockRepository.save(stock);
     }
