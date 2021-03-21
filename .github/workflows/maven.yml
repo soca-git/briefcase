@@ -7,60 +7,17 @@ on:
     branches: [ master ]
 
 jobs:
-  # Build & Test
-  build-test:
-    runs-on: ubuntu-latest
-
-    # Services
-    services:
-      # Setup Postgres database
-      # (Docker Container)
-      postgres:
-        image: postgres:13.2
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: stock
-        ports:
-          - 5432:5432
-        options:
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    # Steps
-    steps:
-      # Checkout repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      # Set up Java 15
-      - name: Set up JDK 15
-        uses: actions/setup-java@v1
-        with:
-          java-version: 15
-      # Cache dependencies
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      # Run tests
-      - name: Test with Maven
-        run: mvn -B test --file pom.xml
-        env:
-          SPRING_PROFILE: dev
-
   # Deploy
   deploy:
-    needs: build-test
+    #needs: build-test
     runs-on: ubuntu-latest
     
     # Steps
     steps:
       - name: Update remote
-        run: heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
+        env:
+          HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
+        run: heroku git:remote -a $HEROKU_APP_NAME
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Deploy to Heroku
