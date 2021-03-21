@@ -1,14 +1,14 @@
 
-# This workflow will test a Java project with Maven
-name: Java CI with Maven
+# This workflow will build, test and deploy the application
+name: Heroku CI/CD
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  # Build
-  build-test-deploy:
+  # Build & Test
+  build-test:
     runs-on: ubuntu-latest
 
     # Services
