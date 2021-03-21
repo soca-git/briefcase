@@ -21,13 +21,6 @@ public class PortfolioConfig
     {
         return args -> {
 
-            // Test IEX Cloud API.
-            IEXClient client = new IEXClient();
-            System.out.println(String.format("API Version: %s", client.getVersion()));
-            Quote stockQuote = client.getStockQuote("AAPL");
-            System.out.println(stockQuote);
-            Quote cryptoQuote = client.getCryptoQuote("BTCUSDT");
-            System.out.println(cryptoQuote);
         };
     }
 }
