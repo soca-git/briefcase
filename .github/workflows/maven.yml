@@ -1,3 +1,4 @@
+
 # This workflow will test a Java project with Maven
 name: Java CI with Maven
 
@@ -7,14 +8,34 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
 
+    services:
+      # Setup Postgres database
+      image: postgres:13.2
+      env:
+        POSTGRES_DB: stock
+        POSTGRES_PASSWORD:
+        POSTGRES_USER:
+      ports:
+        - 5432/tcp
+      options:
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 15
-      uses: actions/setup-java@v1
-      with:
-        java-version: 15
-    - name: Test with Maven
-      run: mvn -B test --file pom.xml
+      # Check out repository
+      - name: Check out repository
+        uses: actions/checkout@v2
+      # Set up Java 15
+      - name: Set up JDK 15
+        uses: actions/setup-java@v1
+        with:
+          java-version: 15
+      # Run tests
+      - name: Test with Maven
+        run: mvn -B test --file pom.xml
+        env:
+          SPRING_PROFILE: dev
