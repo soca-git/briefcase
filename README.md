@@ -12,7 +12,7 @@
 > https://briefcase-app.herokuapp.com/api/v1/portfolio?name=example  
 > (allow some time for loading)
 
-![dashboard](dashboard3.png)
+![dashboard](dashboard.png)
 
 
 ## Application Features
