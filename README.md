@@ -28,7 +28,7 @@
 - [x] Add ability to supply purchase price of item.
 - [x] Add profit/loss related metrics.
 - [ ] Add available ticker symbol index/search.
-- [ ] Add ability to update/refresh market prices.
+- [x] Add ability to update/refresh market prices.
 - [x] Add ability to remove items from portfolio.
 
 
