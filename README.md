@@ -1,4 +1,7 @@
+
 # Financial Portfolio Application
+
+[![Heroku CI/CD](https://github.com/soca-git/briefcase/actions/workflows/maven.yml/badge.svg)](https://github.com/soca-git/briefcase/actions/workflows/maven.yml)
 
 > A personal project which aims to create a simple but effective application  
 > which enables a user to create a portfolio of their financial assets,  
@@ -39,9 +42,9 @@
 - [x] Implement version control through Git/GitHub.
 - [ ] Create project issues on GitHub to manage project timeline.
 - [x] Deploy Application to Heroku.
-- [ ] Implement Test Suite for backend using JUnit.
-- [ ] Study/research CI/CD.
-- [ ] Implement CI/CD pipeline.
+- [x] Implement Test Suite for backend using JUnit.
+- [x] Study/research CI/CD.
+- [x] Implement CI/CD pipeline.
 - [ ] Investigate front-end framework/libraries.
 - [ ] Mobile friendly.
 
