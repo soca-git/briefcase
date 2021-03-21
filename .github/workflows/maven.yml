@@ -63,12 +63,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      # Deploy to Heroku
+      # Add remote heroku
+      - name: Add remote heroku
+        run: git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}.git
       - name: Deploy to Heroku
-        uses: AkhileshNS/heroku-deploy@v3.12.12
-        with:
-          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
-          HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
-          HEROKU_EMAIL: ${{secrets.HEROKU_EMAIL}}
-          branch: master
-          usedocker: true
+        run: git push heroku master
