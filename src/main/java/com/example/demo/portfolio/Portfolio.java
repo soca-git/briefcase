@@ -1,6 +1,9 @@
 package com.example.demo.portfolio;
 
+import com.example.demo.portfolioitem.PortfolioItem;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="portfolio")
@@ -22,6 +25,10 @@ public class Portfolio
     @Column(name="name")
     private String name;
 
+    // Thymeleaf infinite recursion reference error.
+    //    @OneToMany(mappedBy="owner")
+    //    private List<PortfolioItem> items;
+
     public Portfolio() {
     }
 
@@ -41,6 +48,11 @@ public class Portfolio
     public String getName() {
         return name;
     }
+
+    //public List<PortfolioItem> getItems()
+    //    {
+    //        return items;
+    //    }
 
     public void setId(Long id) {
         this.id = id;

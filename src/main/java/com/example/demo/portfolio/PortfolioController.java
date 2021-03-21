@@ -94,4 +94,16 @@ public class PortfolioController
         portfolioItemService.deletePortfolioItem(id);
         return portfolioView(model, portfolio_name);
     }
+
+    // Update Portfolio Prices.
+    @PostMapping("/update")
+    public String updatePrices(
+            Model model,
+            @RequestParam(name="name") String portfolio_name
+    )
+    {
+        Portfolio portfolio = portfolioService.getOrCreatePortfolio(portfolio_name);
+        portfolioService.updatePrices(portfolio);
+        return portfolioView(model, portfolio_name);
+    }
 }

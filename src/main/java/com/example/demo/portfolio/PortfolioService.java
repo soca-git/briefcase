@@ -1,5 +1,8 @@
 package com.example.demo.portfolio;
 
+import com.example.demo.item.ItemService;
+import com.example.demo.portfolioitem.PortfolioItem;
+import com.example.demo.portfolioitem.PortfolioItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -8,11 +11,19 @@ import java.util.List;
 public class PortfolioService
 {
     private final PortfolioRepository portfolioRepository;
+    private final PortfolioItemService portfolioItemService;
+    private final ItemService itemService;
 
     @Autowired
-    public PortfolioService(PortfolioRepository portfolioRepository)
+    public PortfolioService(
+            PortfolioRepository portfolioRepository,
+            PortfolioItemService portfolioItemService,
+            ItemService itemService
+    )
     {
         this.portfolioRepository = portfolioRepository;
+        this.portfolioItemService = portfolioItemService;
+        this.itemService = itemService;
     }
 
     public Portfolio getOrCreatePortfolio(String portfolio_name)
@@ -34,6 +45,14 @@ public class PortfolioService
         Portfolio portfolio = new Portfolio(portfolio_name);
         portfolioRepository.save(portfolio);
         return portfolio;
+    }
+
+    public void updatePrices(Portfolio portfolio)
+    {
+        for (PortfolioItem pItem : portfolioItemService.getPortfolioItems(portfolio))
+        {
+            itemService.updatePrice(pItem.getItem());
+        }
     }
 
     public List<Portfolio> getPortfolios()

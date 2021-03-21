@@ -1,6 +1,8 @@
 package com.example.demo.crypto;
 
 import com.example.demo.iexclient.IEXClient;
+import com.example.demo.item.ItemService;
+import com.example.demo.stock.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zankowski.iextrading4j.api.stocks.Quote;
@@ -8,7 +10,7 @@ import pl.zankowski.iextrading4j.api.stocks.Quote;
 import java.util.List;
 
 @Service
-public class CryptoService
+public class CryptoService extends ItemService
 {
     private final CryptoRepository cryptoRepository;
     private final IEXClient iexClient;
@@ -41,6 +43,13 @@ public class CryptoService
         Crypto crypto = new Crypto(ticker, price);
         cryptoRepository.save(crypto);
         return crypto;
+    }
+
+    public void updatePrice(Crypto crypto)
+    {
+        Quote quote = iexClient.getStockQuote(crypto.getTicker());
+        crypto.setPrice(quote.getLatestPrice().doubleValue());
+        cryptoRepository.save(crypto);
     }
 
     public List<Crypto> getCryptos()

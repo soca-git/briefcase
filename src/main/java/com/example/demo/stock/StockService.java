@@ -1,6 +1,7 @@
 package com.example.demo.stock;
 
 import com.example.demo.iexclient.IEXClient;
+import com.example.demo.item.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zankowski.iextrading4j.api.stocks.Quote;
@@ -10,7 +11,7 @@ import java.util.List;
 // Spring 'bean' for auto-wire to
 // stock controller.
 @Service
-public class StockService
+public class StockService extends ItemService
 {
     private final StockRepository stockRepository;
     private final IEXClient iexClient;
@@ -46,6 +47,13 @@ public class StockService
         Stock stock = new Stock(name, ticker, price);
         stockRepository.save(stock);
         return stock;
+    }
+
+    public void updatePrice(Stock stock)
+    {
+        Quote quote = iexClient.getStockQuote(stock.getTicker());
+        stock.setPrice(quote.getLatestPrice().doubleValue());
+        stockRepository.save(stock);
     }
 
     public List<Stock> getStocks()
