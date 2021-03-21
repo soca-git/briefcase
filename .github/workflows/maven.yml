@@ -12,18 +12,19 @@ jobs:
 
     services:
       # Setup Postgres database
-      image: postgres:13.2
-      env:
-        POSTGRES_DB: stock
-        POSTGRES_PASSWORD:
-        POSTGRES_USER:
-      ports:
-        - 5432/tcp
-      options:
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+      postgres:
+        image: postgres:13.2
+        env:
+          POSTGRES_USER: soca
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: stock
+        ports:
+          - 5432/tcp
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       # Check out repository
