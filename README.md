@@ -32,7 +32,7 @@
 - [x] Add profit/loss related metrics.
 - [ ] Add available ticker symbol index/search.
 - [x] Add ability to update/refresh market prices.
-- [x] Add ability to remove items from portfolio.
+- [x] Add ability to remove items from a portfolio.
 
 
 ## Project Milestones
@@ -42,7 +42,7 @@
 - [x] Implement version control through Git/GitHub.
 - [ ] Create project issues on GitHub to manage project timeline.
 - [x] Deploy Application to Heroku.
-- [x] Implement Test Suite for backend using JUnit.
+- [x] Implement Test Suite for back-end using JUnit.
 - [x] Study/research CI/CD.
 - [x] Implement CI/CD pipeline.
 - [ ] Investigate front-end framework/libraries.
@@ -55,11 +55,12 @@
 > * Maven
 > * Spring/Spring Boot
 > * Spring Data JPA
-> * PostgeSQL
+> * Postges
 > * [iextrading4j](https://github.com/WojciechZankowski/iextrading4j)
 > * IEX Cloud API
 > * Heroku
 > * Git/GitHub
+> * Git Actions
 
 > * HTML/CSS
 > * JavaScript
