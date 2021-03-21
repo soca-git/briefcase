@@ -31,8 +31,8 @@ jobs:
 
     # Steps
     steps:
-      # Check out repository
-      - name: Check out repository
+      # Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v2
       # Set up Java 15
       - name: Set up JDK 15
@@ -59,8 +59,12 @@ jobs:
     
     # Steps
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Update remote
+      - run: heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
