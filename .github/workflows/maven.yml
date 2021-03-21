@@ -15,9 +15,9 @@ jobs:
     # Steps
     steps:
       - name: Update remote
+        run: heroku git:remote -a $HEROKU_APP_NAME
         env:
           HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
-        run: heroku git:remote -a $HEROKU_APP_NAME
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Deploy to Heroku
