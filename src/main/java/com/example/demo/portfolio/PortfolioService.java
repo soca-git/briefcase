@@ -2,7 +2,6 @@ package com.example.demo.portfolio;
 
 import com.example.demo.crypto.CryptoService;
 import com.example.demo.item.Item;
-import com.example.demo.item.ItemService;
 import com.example.demo.portfolioitem.PortfolioItem;
 import com.example.demo.portfolioitem.PortfolioItemService;
 import com.example.demo.stock.StockService;
@@ -15,7 +14,6 @@ public class PortfolioService
 {
     private final PortfolioRepository portfolioRepository;
     private final PortfolioItemService portfolioItemService;
-    private final ItemService itemService;
     private final StockService stockService;
     private final CryptoService cryptoService;
 
@@ -23,14 +21,12 @@ public class PortfolioService
     public PortfolioService(
             PortfolioRepository portfolioRepository,
             PortfolioItemService portfolioItemService,
-            ItemService itemService,
             StockService stockService,
             CryptoService cryptoService
     )
     {
         this.portfolioRepository = portfolioRepository;
         this.portfolioItemService = portfolioItemService;
-        this.itemService = itemService;
         this.stockService = stockService;
         this.cryptoService = cryptoService;
     }
@@ -74,7 +70,15 @@ public class PortfolioService
     {
         for (PortfolioItem pItem : portfolioItemService.getPortfolioItems(portfolio))
         {
-            itemService.updatePrice(pItem.getItem());
+            String itemClass = pItem.getItem().getClass().getSimpleName();
+            if ("Stock".equals(itemClass))
+            {
+                stockService.updatePrice(pItem.getItem());
+            }
+            else if ("Crypto".equals(itemClass))
+            {
+                cryptoService.updatePrice(pItem.getItem());
+            }
         }
     }
 
