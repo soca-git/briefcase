@@ -8,7 +8,7 @@ on:
 
 jobs:
   # Build
-  build:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     # Services
@@ -39,14 +39,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 15
-
-  # Test
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    # Steps
-    steps:
+      # Cache dependencies
+      - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
       # Run tests
       - name: Test with Maven
         run: mvn -B test --file pom.xml
