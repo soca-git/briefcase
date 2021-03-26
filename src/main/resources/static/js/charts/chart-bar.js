@@ -11,9 +11,9 @@ var positionsBarChart = new Chart(ctx, {
     datasets: [{
       label: "Value",
       data: pitem_holdings,
-      backgroundColor: "#4e73df",
-      hoverBackgroundColor: "#2e59d9",
-      borderColor: "#4e73df",
+      backgroundColor: color_primary,
+      hoverBackgroundColor: color_primary_hover,
+      borderColor: color_primary,
     }],
   },
   options: {
@@ -100,15 +100,15 @@ for (i = 0; i < pitem_total_pls.length; i++)
 {
     if (pitem_total_pls[i] > 0)
     {
-        datasets[0].backgroundColor.push("aquamarine");
-        datasets[0].hoverBackgroundColor.push("#4BD9A9");
-        datasets[0].borderColor.push("aquamarine");
+        datasets[0].backgroundColor.push(color_success);
+        datasets[0].hoverBackgroundColor.push(color_success_hover);
+        datasets[0].borderColor.push(color_success);
     }
     else
     {
-        datasets[0].backgroundColor.push("firebrick");
-        datasets[0].hoverBackgroundColor.push("#8C0606");
-        datasets[0].borderColor.push("firebrick");
+        datasets[0].backgroundColor.push(color_danger);
+        datasets[0].hoverBackgroundColor.push(color_danger_hover);
+        datasets[0].borderColor.push(color_danger);
     }
 }
 

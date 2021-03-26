@@ -30,8 +30,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Logo -->
-            <a class="sidebar-brand " href="">
-                <div class="sidebar-brand-icon rotate-n-15">
+            <a class="sidebar-brand " th:href="@{/api/v1/portfolio/?name=}+${portfolio_name}">
+                <div class="sidebar-brand-icon">
                     <i class="fas fa-briefcase"></i>
                 </div>
             </a>
@@ -96,14 +96,18 @@
 
                 <!-- Topbar -->
                 <nav class="bg-white topbar mb-4 static-top shadow d-sm-flex flex-wrap align-items-center justify-content-between">
-                    <!-- Page Heading -->
-                    <div class="nav-item d-sm-flex align-items-center justify-content-flex-start">
-                        <h1 class="h3 m-2 text-gray-800">
-                            <i class="mr-2 fas fa-chart-pie"></i>Portfolio
-                        </h1>
-                    </div>
+                    <!-- Arrow -->
+                    <button id="arrow" class="m-2 btn btn-primary">
+                        <i id="arrowIcon" class="fas fa-arrow-circle-right"></i>
+                    </button>
+
+<!--                    &lt;!&ndash; Page Heading &ndash;&gt;-->
+<!--                    <h1 class="h3 m-2 text-primary">-->
+<!--                        <i class="mr-2 fas fa-chart-pie"></i>Portfolio-->
+<!--                    </h1>-->
+
                     <!-- Current Portfolio-->
-                    <h1 class="h3 m-2 pb-1 text-gray-800">[<span th:text="${portfolio_name}"></span>]</h1>
+                    <h1 class="h3 m-2 pb-1 text-primary">[<span th:text="${portfolio_name}"></span>]</h1>
 
                     <!-- Refresh Prices-->
                     <form action="#" th:action="@{/api/v1/portfolio/update?name=}+${portfolio_name}" method="post">
@@ -178,7 +182,7 @@
                         <div class="col-xl-7 col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Positions</h6>
+                                    <h6 class="m-0 font-weight-bold text-secondary">Positions</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -194,7 +198,7 @@
                         <div class="col-xl-5 col-lg-6">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Holdings Breakdown</h6>
+                                    <h6 class="m-0 font-weight-bold text-secondary">Holdings Breakdown</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
@@ -213,7 +217,7 @@
                         <div class="col-xl">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Profit/Loss</h6>
+                                    <h6 class="m-0 font-weight-bold text-secondary">Profit/Loss</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -263,7 +267,7 @@
                             <!-- Information -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Site Information</h6>
+                                    <h6 class="m-0 font-weight-bold text-secondary">Site Information</h6>
                                 </div>
                                 <div class="card-body">
                                     <p>Stock prices and other information are retrieved from the IEX cloud financial markets API.</p>
@@ -324,6 +328,23 @@
         }
     </script>
 
+    <script th:inline="javascript">
+        // Get CSS color variables
+        var style = getComputedStyle(document.body);
+        var color_primary = style.getPropertyValue('--primary')
+        var color_primary_hover = style.getPropertyValue('--primary-hover')
+        var color_secondary = style.getPropertyValue('--secondary')
+        var color_secondary_hover = style.getPropertyValue('--secondary-hover')
+        var color_success = style.getPropertyValue('--success')
+        var color_success_hover = style.getPropertyValue('--success-hover')
+        var color_info = style.getPropertyValue('--info')
+        var color_info_hover = style.getPropertyValue('--info-hover')
+        var color_warning = style.getPropertyValue('--warning')
+        var color_warning_hover = style.getPropertyValue('--warning-hover')
+        var color_danger = style.getPropertyValue('--danger')
+        var color_danger_hover = style.getPropertyValue('--danger-hover')
+    </script>
+
     <!-- Front-end portfolio calculations-->
     <script th:src="@{/js/calculate.js}"></script>
     <script th:src="@{/js/update.js}"></script>
@@ -336,6 +357,7 @@
     <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
     <!--Custom scripts for all pages-->
+    <script th:src="@{/js/arrow.js}"></script>
     <script th:src="@{/js/sb-admin-2.js}"></script>
 
     <!-- Page level plugins -->

@@ -2,6 +2,27 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+function fillPieChartColors(colors, repeat) {
+
+  var repeated_colors = [];
+  for (var i = 0; i < repeat; i++)
+  {
+      for (var j = 0; j < colors.length; j++) {
+        repeated_colors.push(colors[j]);
+      }
+  }
+  return repeated_colors;
+}
+
+var pie_colors = fillPieChartColors(
+    [color_primary, color_secondary, color_success, color_info, color_warning],
+    10
+);
+var pie_hover_colors = fillPieChartColors(
+    [color_primary_hover, color_secondary_hover, color_success_hover, color_info_hover, color_warning_hover],
+    10
+);
+
 // Holdings Pie Chart
 var ctx = document.getElementById("holdingsPieChart");
 var holdingsPieChart = new Chart(ctx, {
@@ -11,8 +32,8 @@ var holdingsPieChart = new Chart(ctx, {
     datasets: [{
       labels: pitem_tickers,
       data: pitem_holdings,
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#4e73df', '#1cc88a', '#36b9cc', '#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#2e59d9', '#17a673', '#2c9faf', '#2e59d9', '#17a673', '#2c9faf'],
+      backgroundColor: pie_colors,
+      hoverBackgroundColor: pie_hover_colors,
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
