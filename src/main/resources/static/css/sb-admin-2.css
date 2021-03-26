@@ -165,13 +165,13 @@ sup {
 }
 
 a {
-  color: var(--primary);
+  color: var(--info);
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: var(--primary-hover);
+  color: var(--info-hover);
   text-decoration: underline;
 }
 

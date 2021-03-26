@@ -11,8 +11,8 @@ var positionsBarChart = new Chart(ctx, {
     datasets: [{
       label: "Value",
       data: pitem_holdings,
-      backgroundColor: color_primary,
-      hoverBackgroundColor: color_primary_hover,
+      backgroundColor: chart_colors,
+      hoverBackgroundColor: chart_hover_colors,
       borderColor: color_primary,
     }],
   },
